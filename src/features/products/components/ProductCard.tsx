@@ -1,5 +1,6 @@
 import { useProducts } from "../../../hooks/useProducts";
 import { Icons } from "../../../components/Icons";
+import { Link } from "react-router-dom";
 
 export function ProductCard() {
   const products = useProducts();
@@ -8,41 +9,23 @@ export function ProductCard() {
     <div className="w-full max-w-450 mx-auto px-3 sm:px-5 lg:px-8">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
         {products.map((product) => (
-          <div
+          <Link
+            to={`/product/${product.product_id}`}
             key={product.product_id}
-            className="
-          bg-white rounded-3xl overflow-hidden
-          border border-slate-200
-          shadow-sm hover:shadow-2xl
-          hover:-translate-y-1
-          transition-all duration-300
-          group
-        "
+            className=" bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
           >
             <div className="relative aspect-square overflow-hidden p-3 sm:p-4 flex items-center justify-center bg-slate-50">
               <picture>
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="
-                w-full h-full object-contain
-                group-hover:scale-105
-                transition-transform duration-500
-              "
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </picture>
             </div>
 
             <div className="p-3 sm:p-4">
-              <h3
-                className="
-              font-bold text-slate-800
-    group-hover:text-sky-600
-    transition-colors
-    leading-tight
-    truncate
-            "
-              >
+              <h3 className=" font-bold text-slate-800 group-hover:text-sky-600 transition-colors leading-tight truncate">
                 {product.name}
               </h3>
 
@@ -89,7 +72,7 @@ export function ProductCard() {
                 </button>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

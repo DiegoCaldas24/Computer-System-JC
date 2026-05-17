@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center mt-16 text-xs text-slate-400 border-t border-gray-200 pt-8">
-        &copy; 2024 TechPro Solutions. San Salvador, El Salvador.
+        &copy; 2024 TechPro Solutions. 15498, Ate 15498
       </div>
     </footer>
   );

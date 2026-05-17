@@ -4,14 +4,11 @@ import { Icons } from "../components/Icons";
 export function HomePage() {
   return (
     <div className="animate-in fade-in duration-700">
-      <section className="relative pt-25 pb-24 px-4 overflow-hidden bg-linear-to-b from-sky-50 to-white">
+      <section className="relative pt-25 pb-24 px-4 overflow-hidden bg-secondary">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-250 h-150 bg-sky-100/50 rounded-full blur-3xl -z-10"></div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div className="text-center md:text-left">
-            <span className="inline-block px-4 py-1.5 bg-sky-100 text-sky-600 rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-sky-200">
-              Líderes en Tecnología
-            </span>
             <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
               Soluciones <span className="text-sky-500">Digitales</span> para tu
               Mundo
@@ -23,7 +20,7 @@ export function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link
                 to="/products"
-                className="bg-sky-500 hover:bg-sky-600 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-xl shadow-sky-200 hover:-translate-y-1"
+                className="bg-primary hover:bg-sky-600 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-xl shadow-sky-200 hover:-translate-y-1"
               >
                 Comprar Ahora <Icons.ChevronRight />
               </Link>

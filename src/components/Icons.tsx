@@ -154,6 +154,63 @@ export const Icons = {
       <path d="M16 10a4 4 0 0 1-8 0" />
     </svg>
   ),
+  ShoppingCar: () => (
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Asa */}
+      <path
+        d="M18 22H30L40 68H88L100 36H48"
+        stroke="#2563EB"
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Cuerpo carrito */}
+      <path
+        d="M40 68H88"
+        stroke="#2563EB"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+
+      {/* Ruedas */}
+      <circle cx="48" cy="88" r="8" fill="#374151" />
+
+      <circle cx="84" cy="88" r="8" fill="#374151" />
+
+      {/* Centro ruedas */}
+      <circle cx="48" cy="88" r="3" fill="white" />
+
+      <circle cx="84" cy="88" r="3" fill="white" />
+
+      {/* Líneas internas */}
+      <line
+        x1="50"
+        y1="40"
+        x2="92"
+        y2="40"
+        stroke="#93C5FD"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      <line
+        x1="52"
+        y1="52"
+        x2="88"
+        y2="52"
+        stroke="#93C5FD"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
   Laptop: () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

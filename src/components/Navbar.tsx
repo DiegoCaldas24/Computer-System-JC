@@ -4,11 +4,11 @@ import { Icons } from "./Icons";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-sky-500 backdrop-blur-md shadow-sm py-3">
+    <nav className="fixed top-0 w-full z-50 bg-primary backdrop-blur-md shadow-sm py-3">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center pl-10 cursor-pointer">
-          <Link to="/" className="w-15 h-auto">
+          <Link to="/" className="w-50 h-auto">
             <img src={logo} alt="TechPro Solutions" />
           </Link>
         </div>
@@ -34,10 +34,12 @@ export default function Navbar() {
             reparaciones
           </Link>
         </div>
+        {/* Usuario */}
 
         {/* Carrito */}
-        <button className="bg-slate-900 text-white p-2.5 rounded-xl hover:bg-sky-600 transition-colors">
-          {<Icons.ShoppingBag />}
+        <button className="flex w-30 gap-2 bg-quaternary  text-white p-2.5 rounded-xl hover:bg-sky-600 transition-colors">
+          {<Icons.ShoppingCar />}
+          <span>Carrito</span>
         </button>
       </div>
     </nav>

@@ -5,18 +5,10 @@ import { CategoryCard } from "../features/categories/components/CategoryCard";
 // --- Page: Products ---
 export function ProductsPage() {
   return (
-    <div className="pt-25 pb-24 px-4 bg-slate-50 min-h-screen">
+    <div className="pt-17 pb-24 px-4 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 gap-8">
-          <div>
-            <p className="text-slate-500 text-lg">
-              Lo mejor en hardware seleccionado por expertos.
-            </p>
-          </div>
-          <div>
-            <span className="text-slate-500 text-sm uppercase tracking-wide">
-              Filtrar por categoría:
-            </span>
+          <div className="pl-7">
             {/* Category card */}
             <CategoryCard />
           </div>

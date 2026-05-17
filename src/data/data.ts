@@ -1,9 +1,9 @@
-import type {Product} from "../features/products/types/product";
+import type { Product } from "../features/products/types/product";
 
 // --- Mock Data ---
 export const PRODUCTS: Product[] = [
   {
-    id: 1,
+    product_id: 1,
     name: "MacBook Pro M2",
     price: 1299,
     category: "Laptops",
@@ -12,7 +12,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1517336712461-4c160d1b5ad1?auto=format&fit=crop&q=80&w=400",
   },
   {
-    id: 2,
+    product_id: 2,
     name: "Gaming PC RTX 4080",
     price: 2499,
     category: "Escritorio",
@@ -21,7 +21,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=400",
   },
   {
-    id: 3,
+    product_id: 3,
     name: 'Monitor UltraWide 34"',
     price: 499,
     category: "Monitores",
@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=400",
   },
   {
-    id: 4,
+    product_id: 4,
     name: "Teclado Mecánico RGB",
     price: 120,
     category: "Accesorios",
@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&q=80&w=400",
   },
   {
-    id: 5,
+    product_id: 5,
     name: "Impresora Láser Color",
     price: 350,
     category: "Impresoras",
@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1612815154858-60aa0c79b6af?auto=format&fit=crop&q=80&w=400",
   },
   {
-    id: 6,
+    product_id: 6,
     name: "SSD NVMe 2TB",
     price: 180,
     category: "Componentes",

@@ -85,8 +85,8 @@ export const Icons = {
   ),
   User: () => (
     <svg
-      width="20"
-      height="20"
+      width="30"
+      height="30"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -156,8 +156,8 @@ export const Icons = {
   ),
   ShoppingCar: () => (
     <svg
-      width={24}
-      height={24}
+      width="35"
+      height="35"
       viewBox="0 0 120 120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

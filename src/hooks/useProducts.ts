@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getAllProducts, getProductById } from "../services/ProductService";
+import {
+  getAllProducts,
+  getProductByCategory,
+  getProductById,
+} from "../services/ProductService";
 import type { Product } from "../features/products/types/product";
 
 export const useProducts = () => {
@@ -30,4 +34,19 @@ export const useProduct = (product_id: number) => {
   }, [product_id]);
 
   return product;
+};
+
+export const useCategoryProducts = (category: number) => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await getProductByCategory(category);
+      setProducts(products);
+    };
+
+    fetchProducts();
+  }, [category]);
+
+  return products;
 };

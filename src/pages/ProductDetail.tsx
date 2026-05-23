@@ -8,7 +8,7 @@ export function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const product = useProduct(Number(product_id));
   return (
-    <div className="pt-20 pb-20 px-6 max-w-7xl mx-auto">
+    <div className="pt-0 pb-20 px-6 max-w-7xl mx-auto">
       {/* Botón de retroceso & Migajas de pan */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
         <Link

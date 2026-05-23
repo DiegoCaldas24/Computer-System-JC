@@ -10,8 +10,9 @@ export function ProductsPage() {
     "https://qoqkfefgnvgrfeorwteh.supabase.co/storage/v1/object/sign/images-logos/3.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmM0NDM3OC0wMmM4LTQ0OTMtYjVlMS0xMmE2ZDQ5N2M0ZjAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMtbG9nb3MvMy53ZWJwIiwiaWF0IjoxNzc5MDQxMjQ5LCJleHAiOjE5MzY3MjEyNDl9.YMxsE3GBT07HGsMr8lk-3Zz4I16ux3HXU-CC7d0BWKQ",
     "https://qoqkfefgnvgrfeorwteh.supabase.co/storage/v1/object/sign/images-logos/4.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmM0NDM3OC0wMmM4LTQ0OTMtYjVlMS0xMmE2ZDQ5N2M0ZjAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMtbG9nb3MvNC53ZWJwIiwiaWF0IjoxNzc5MDQxMjYxLCJleHAiOjE5MzY3MjEyNjF9.esCOBU0-1iAd5JvEJbeNOJOekK94c_fJAlaDTUM9b4k",
   ];
+
   return (
-    <div className="pt-17 pb-24 px-4 bg-slate-50 min-h-screen">
+    <div className="pt-0 pb-24 px-4 bg-slate-50 min-h-screen">
       <Carousel images={images} autoPlay interval={4000} />
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 gap-8">

@@ -4,7 +4,7 @@ import { Icons } from "../components/Icons";
 export function HomePage() {
   return (
     <div className="animate-in fade-in duration-700">
-      <section className="relative pt-25 pb-24 px-4 overflow-hidden bg-secondary">
+      <section className="relative pt-0 pb-24 px-4 overflow-hidden bg-secondary">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-250 h-150 bg-sky-100/50 rounded-full blur-3xl -z-10"></div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">

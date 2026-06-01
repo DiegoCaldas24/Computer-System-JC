@@ -1,10 +1,10 @@
-import { useState, useMemo, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useMemo } from "react";
 import { Carousel } from "../components/Carousel";
 import { Pagination } from "../components/Pagination";
 import { CategoryCard } from "../features/categories/components/CategoryCard";
 import { ProductCard } from "../features/products/components/ProductCard";
-import { useProducts, useSearchProducts } from "../hooks/useProducts";
+import { useProducts } from "../hooks/useProducts";
+import { useSearch } from "../context/SearchContext";
 import logoWatermark from "../assets/logo-vec-icon.png";
 
 const ITEMS_PER_PAGE = 8;
@@ -12,17 +12,10 @@ const ITEMS_PER_PAGE = 8;
 export function ProductsPage() {
   const [page, setPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-  const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search") || "";
+  const { searchQuery } = useSearch();
 
-  // Cargar todos los productos si no hay búsqueda
+  // Cargar todos los productos
   const allProducts = useProducts();
-
-  // Buscar en BD si hay query
-  const { products: searchResults, loading: searchLoading } = useSearchProducts(
-    searchQuery,
-    selectedCategories.length > 0 ? selectedCategories : undefined,
-  );
 
   const images = [
     "https://qoqkfefgnvgrfeorwteh.supabase.co/storage/v1/object/sign/images-logos/1.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmM0NDM3OC0wMmM4LTQ0OTMtYjVlMS0xMmE2ZDQ5N2M0ZjAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMtbG9nb3MvMS53ZWJwIiwiaWF0IjoxNzc5MDQxMjI2LCJleHAiOjE5MzY3MjEyMjZ9.eCJpxYtAtWKZ-S4MFBo64bPM69QPaXnrT0JFieUjdOM",
@@ -31,56 +24,34 @@ export function ProductsPage() {
     "https://qoqkfefgnvgrfeorwteh.supabase.co/storage/v1/object/sign/images-logos/4.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmM0NDM3OC0wMmM4LTQ0OTMtYjVlMS0xMmE2ZDQ5N2M0ZjAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMtbG9nb3MvNC53ZWJwIiwiaWF0IjoxNzc5MDQxMjYxLCJleHAiOjE5MzY3MjEyNjF9.esCOBU0-1iAd5JvEJbeNOJOekK94c_fJAlaDTUM9b4k",
   ];
 
-  // Determinar qué productos mostrar: búsqueda en BD o todos con filtro local
-  const { filteredProducts, hasSearched, isEmptySearch } = useMemo(() => {
-    if (searchQuery.trim()) {
-      // Si hay búsqueda (no vacía), usar resultados de la BD
-      return {
-        filteredProducts: searchResults,
-        hasSearched: true,
-        isEmptySearch: false,
-      };
-    } else if (searchQuery && searchQuery.length > 0) {
-      // Si searchQuery existe pero está vacío (solo espacios), mostrar TODOS los productos con mensaje
-      if (selectedCategories.length === 0) {
-        return {
-          filteredProducts: allProducts,
-          hasSearched: true,
-          isEmptySearch: true,
-        };
-      }
-      return {
-        filteredProducts: allProducts.filter((product) =>
-          selectedCategories.includes(product.category_id || 0),
-        ),
-        hasSearched: true,
-        isEmptySearch: true,
-      };
-    } else {
-      // Si no hay búsqueda en la URL, filtrar por categoría en memoria
-      if (selectedCategories.length === 0) {
-        return {
-          filteredProducts: allProducts,
-          hasSearched: false,
-          isEmptySearch: false,
-        };
-      }
-      return {
-        filteredProducts: allProducts.filter((product) =>
-          selectedCategories.includes(product.category_id || 0),
-        ),
-        hasSearched: false,
-        isEmptySearch: false,
-      };
+  // Filtrar productos localmente por nombre y categoría
+  const filteredProducts = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    let result = allProducts;
+
+    if (query) {
+      result = result.filter((p) =>
+        p.name.toLowerCase().includes(query),
+      );
     }
-  }, [searchQuery, searchResults, allProducts, selectedCategories]);
+
+    if (selectedCategories.length > 0) {
+      result = result.filter((p) =>
+        selectedCategories.includes(p.category_id || 0),
+      );
+    }
+
+    return result;
+  }, [searchQuery, allProducts, selectedCategories]);
+
+  const hasSearched = searchQuery.trim().length > 0;
 
   // Calcular paginación
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
-  // Resetear página cuando cambian las categorías
+  // Resetear página cuando cambian las categorías o búsqueda
   const handleCategoryChange = (categoryId: number, isChecked: boolean) => {
     setSelectedCategories((prev) => {
       if (isChecked) {
@@ -89,16 +60,8 @@ export function ProductsPage() {
         return prev.filter((id) => id !== categoryId);
       }
     });
-    setPage(1); // Resetear a la primera página
+    setPage(1);
   };
-  const prevSearchQuery = useRef(searchQuery);
-  // Resetear página cuando cambia la búsqueda
-  useEffect(() => {
-    if (prevSearchQuery.current !== searchQuery) {
-      prevSearchQuery.current = searchQuery;
-      setPage(1);
-    }
-  }, [searchQuery]);
 
   return (
     <div className="pt-14 pb-24 px-4 bg-slate-50 min-h-screen relative">
@@ -128,67 +91,33 @@ export function ProductsPage() {
               {/* Mostrar cantidad de productos encontrados */}
               <div className="mb-4 text-slate-600">
                 <p className="text-sm">
-                  {searchQuery && hasSearched && isEmptySearch && (
-                    <>No se encontraron productos </>
+                  {hasSearched && filteredProducts.length === 0 && (
+                    <>No se encontraron productos para "</>
                   )}
-                  {searchQuery && hasSearched && !isEmptySearch && (
+                  {hasSearched && filteredProducts.length > 0 && (
                     <>
                       Resultados para "
-                      <span className="font-bold">{searchQuery}</span>"{" "}
+                      <span className="font-bold">{searchQuery}</span>" —{" "}
                     </>
                   )}
-                  {searchLoading ? (
-                    <span>Buscando...</span>
-                  ) : (
+                  {filteredProducts.length > 0 && (
                     <>
-                      {!hasSearched && (
-                        <>
-                          Mostrando{" "}
-                          <span className="font-bold">
-                            {paginatedProducts.length}
-                          </span>{" "}
-                          de{" "}
-                          <span className="font-bold">
-                            {filteredProducts.length}
-                          </span>{" "}
-                          productos
-                        </>
-                      )}
-                      {hasSearched &&
-                        !isEmptySearch &&
-                        filteredProducts.length > 0 && (
-                          <>
-                            Mostrando{" "}
-                            <span className="font-bold">
-                              {paginatedProducts.length}
-                            </span>{" "}
-                            de{" "}
-                            <span className="font-bold">
-                              {filteredProducts.length}
-                            </span>{" "}
-                            productos
-                          </>
-                        )}
-                      {hasSearched && isEmptySearch && (
-                        <>
-                          Mostrando{" "}
-                          <span className="font-bold">
-                            {paginatedProducts.length}
-                          </span>{" "}
-                          de{" "}
-                          <span className="font-bold">
-                            {filteredProducts.length}
-                          </span>{" "}
-                          productos
-                        </>
-                      )}
+                      Mostrando{" "}
+                      <span className="font-bold">
+                        {paginatedProducts.length}
+                      </span>{" "}
+                      de{" "}
+                      <span className="font-bold">
+                        {filteredProducts.length}
+                      </span>{" "}
+                      productos
                     </>
                   )}
                 </p>
               </div>
 
-              {/* Mostrar mensaje especial cuando la búsqueda está vacía */}
-              {hasSearched && isEmptySearch && !searchLoading && (
+              {/* Mostrar mensaje cuando no hay resultados */}
+              {hasSearched && filteredProducts.length === 0 && (
                 <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-slate-600 text-center">
                     No se encontraron productos

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
+import { SearchProvider } from "./context/SearchContext";
 
 // --- Main App ---
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
   }, [pathname]);
 
   return (
+    <SearchProvider>
     <div className="min-h-screen bg-white text-slate-800 font-sans selection:bg-sky-100 selection:text-sky-700">
       <Navbar />
       <main>
@@ -36,5 +38,6 @@ export default function App() {
         }}
       />
     </div>
+    </SearchProvider>
   );
 }

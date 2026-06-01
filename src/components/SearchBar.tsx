@@ -1,34 +1,26 @@
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearch } from "../context/SearchContext";
 import { Icons } from "./Icons";
 
 export function SearchBar() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const initialSearch = searchParams.get("search") || "";
-  const [searchInput, setSearchInput] = useState(initialSearch);
+  const { searchQuery, setSearchQuery } = useSearch();
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchInput.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchInput)}`);
-    }
   };
 
   const handleClear = () => {
-    setSearchInput("");
-    navigate("/products");
+    setSearchQuery("");
   };
 
   return (
-    <form onSubmit={handleSearch} className="relative flex items-center">
+    <form onSubmit={handleSubmit} className="relative flex items-center">
       <Icons.Search />
 
       <input
         placeholder="Buscar productos..."
         aria-label="Buscar productos"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         className="
           bg-[#0F2D57]
           border border-[#1E4C84]
@@ -44,7 +36,7 @@ export function SearchBar() {
         "
       />
 
-      {searchInput && (
+      {searchQuery && (
         <button
           type="button"
           onClick={handleClear}

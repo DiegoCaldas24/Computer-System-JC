@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { HomePage, ProductsPage, RepairsPage } from "../pages";
+import { HomePage, ProductsPage, ServicePage } from "../pages";
 
 import App from "../App";
 import { ProductDetail } from "../pages/ProductDetail";
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "repairs",
-        element: <RepairsPage />,
+        element: <ServicePage />,
       },
     ],
   },

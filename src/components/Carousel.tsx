@@ -25,11 +25,11 @@ export function Carousel({
     if (!autoPlay) return;
 
     const slider = setInterval(() => {
-      nextSlide();
+      setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     }, interval);
 
     return () => clearInterval(slider);
-  }, [currentIndex, autoPlay, interval, nextSlide]);
+  }, [autoPlay, interval, images.length]);
 
   return (
     <div
@@ -40,6 +40,7 @@ export function Carousel({
         overflow-hidden
         rounded-3xl
         mx-auto
+        pt-10
       "
     >
       {/* Imagen */}

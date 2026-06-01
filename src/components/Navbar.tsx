@@ -1,154 +1,114 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logoIcon.png";
-import { Icons } from "./Icons";
+import logow from "../assets/logo-vec-w.png";
 import { useState } from "react";
+import { Icons } from "./Icons";
+import { SearchBar } from "./SearchBar";
+interface NavItem {
+  label: string;
+  path: string;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { label: "Inicio", path: "/" },
+  { label: "Catálogo", path: "/products" },
+  { label: "Servicios", path: "/repairs" },
+];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full bg-[#003B6F] text-white shadow-md">
+    <header className="fixed w-full bg-[#0d1b36] text-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="h-16 flex items-center justify-between">
+        <div className="h-14 flex items-center justify-between gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <img className="w-15" src={logo} />
+          <Link
+            to="/"
+            className="flex items-center gap-2 shrink-0"
+            aria-label="Ir al inicio"
+          >
+            <img src={logow} alt="Computer System JC" className="w-30" />
+          </Link>
 
-            <div className="leading-tight flex flex-col items-center">
-              <h1 className="text-sm sm:text-base font-bold">COMPUTER</h1>
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV_ITEMS.map(({ label, path }) => (
+              <Link key={path} to={path}>
+                <span className="px-3 py-1 block">{label}</span>
+              </Link>
+            ))}
+          </nav>
 
-              <p className="text-xs text-slate-200">SYSTEM-JC</p>
-            </div>
+          {/* Desktop right */}
+          <div className="hidden lg:flex items-center gap-5 ml-auto">
+            {/* Buscador */}
+            <SearchBar />
+
+            {/* Carrito */}
+            <button
+              aria-label="Ver carrito"
+              className="
+                text-white
+                hover:text-[#3b9de8]
+                transition-colors
+              "
+            >
+              <Icons.ShoppingCar />
+            </button>
+
+            {/* Usuario */}
+            <button
+              aria-label="Mi cuenta"
+              className="
+                text-white
+                hover:text-[#3b9de8]
+                transition-colors
+              "
+            >
+              <Icons.User />
+            </button>
           </div>
-
-          {/* Desktop */}
-          <div className="hidden lg:flex items-center gap-8">
-            {/* Links */}
-            <nav className="flex items-center gap-6 text-sm font-semibold">
-              <Link to={"/"} className="hover:text-sky-300 transition-colors">
-                INICIO
-              </Link>
-
-              <Link
-                to={"/products"}
-                className="hover:text-sky-300 transition-colors"
-              >
-                PRODUCTOS
-              </Link>
-
-              <Link
-                to={"/repairs"}
-                className="hover:text-sky-300 transition-colors"
-              >
-                SERVICIO TÉCNICO
-              </Link>
-            </nav>
-
-            {/* Search */}
-            <div>
-              <input
-                type="text"
-                placeholder="🔍 Buscar productos ..."
-                className="
-                     w-64
-                     xl:w-80
-                     h-10
-                     rounded-full
-                     px-4
-                     text-sm
-                     text-black
-                     outline-none
-                     bg-white
-                   "
-              />
-            </div>
-
-            {/* Icons */}
-            <div className="flex items-center gap-5">
-              <button className="flex items-center gap-1 hover:scale-105 transition-transform">
-                <Icons.User />
-                <div className="flex flex-col">
-                  <span>Bienvenido</span>
-                  <span>Inicia sesion</span>
-                </div>
-              </button>
-              <button className="w-35 flex flex-auto items-center hover:scale-105 transition-transform">
-                <Icons.ShoppingCar />
-                <div>
-                  <span>Carrito de compras</span>
-                </div>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile button */}
-          <button onClick={() => setOpen(!open)} className="lg:hidden">
-            {open ? <Icons.Minus /> : <Icons.Menu />}
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+            className="lg:hidden text-gray-300 hover:text-white transition-colors ml-auto"
+          >
+            {isOpen ? <Icons.X /> : <Icons.Menu />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       <div
-        className={`
-             lg:hidden
-             overflow-hidden
-             transition-all
-             duration-300
-             bg-[#002F59]
-             ${open ? "max-h-125 py-4" : "max-h-0"}
-           `}
+        className={[
+          "lg:hidden overflow-hidden transition-all duration-300 bg-[#0a1628]",
+          isOpen ? "max-h-96 py-4" : "max-h-0",
+        ].join(" ")}
       >
         <div className="px-4 flex flex-col gap-4">
-          {/* Search */}
-          <input
-            type="text"
-            placeholder="Buscar productos ..."
-            className="
-                 w-full
-                 h-10
-                 rounded-full
-                 px-4
-                 text-sm
-                 text-black
-                 outline-none
-                 bg-white
-               "
-          />
+          <SearchBar />
 
-          {/* Links */}
-          <nav className="flex flex-col gap-3 text-sm font-semibold">
-            <Link to={"/"} className="hover:text-sky-300 transition-colors">
-              INICIO
-            </Link>
-
-            <Link
-              to={"/products"}
-              className="hover:text-sky-300 transition-colors"
-            >
-              PRODUCTOS
-            </Link>
-
-            <Link
-              to={"/repairs"}
-              className="hover:text-sky-300 transition-colors"
-            >
-              SERVICIO TÉCNICO
-            </Link>
+          <nav className="flex flex-col gap-1">
+            {NAV_ITEMS.map(({ label, path }) => (
+              <Link key={path} to={path} onClick={() => setIsOpen(false)}>
+                {label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Icons */}
-          <div className="flex items-center gap-5 pt-2">
-            <button>
+          <div className="flex items-center gap-4 pt-1">
+            <button
+              aria-label="Ver carrito"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               <Icons.ShoppingCar />
             </button>
-
-            <button>
+            <button
+              aria-label="Mi cuenta"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               <Icons.User />
-              <div>
-                <span>Bienvenido</span>
-                <span>Inicia sesion</span>
-              </div>
             </button>
           </div>
         </div>

@@ -2,13 +2,24 @@ import { useState } from "react";
 import { Icons } from "../components/Icons";
 import { Link, useParams } from "react-router-dom";
 import { useProduct } from "../hooks/useProducts";
+import logoWatermark from "../assets/logo-vec-icon.png";
 
 export function ProductDetail() {
   const { product_id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const product = useProduct(Number(product_id));
   return (
-    <div className="pt-0 pb-20 px-6 max-w-7xl mx-auto">
+    <div className="pt-0 pb-20 px-6 max-w-7xl mx-auto relative">
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: `url(${logoWatermark})`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "240px",
+          opacity: 0.04,
+        }}
+      />
+      <div className="relative z-10">
       {/* Botón de retroceso & Migajas de pan */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
         <Link
@@ -136,6 +147,7 @@ export function ProductDetail() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

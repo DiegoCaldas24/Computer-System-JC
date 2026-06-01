@@ -22,13 +22,16 @@ export const CategoryCard = ({
         <span className="text-white text-lg md:text-2xl font-bold">
           CATEGORIAS
         </span>
-        <span className="text-white/60 text-xl md:hidden transition-transform duration-200"
+        <span
+          className="text-white text-xl md:hidden transition-transform duration-200"
           style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
         >
           ▾
         </span>
       </button>
-      <div className={`flex md:flex-col gap-2 pt-3 flex-wrap overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0 md:max-h-96"}`}>
+      <div
+        className={`flex md:flex-col gap-2 pt-3 flex-wrap overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0 md:max-h-96"}`}
+      >
         {categories.map((category) => {
           const isChecked = selectedCategories.includes(category.category_id);
           return (
@@ -38,9 +41,10 @@ export const CategoryCard = ({
                 flex items-center gap-2 cursor-pointer transition rounded-lg
                 md:px-0 md:py-0 md:bg-transparent
                 px-3 py-1.5 text-sm rounded-full border
-                ${isChecked
-                  ? "bg-sky-600 text-white border-sky-500 md:bg-transparent md:text-white md:border-0"
-                  : "bg-white/10 text-white/80 border-white/20 md:bg-transparent md:text-white/70 md:border-0"
+                ${
+                  isChecked
+                    ? "bg-sky-600 text-white border-sky-500 md:bg-transparent md:text-white md:border-0"
+                    : "bg-white/10 text-white/80 border-white/20 md:bg-transparent md:text-white md:border-0"
                 }
               `}
             >

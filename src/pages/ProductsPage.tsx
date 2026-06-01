@@ -5,7 +5,7 @@ import { CategoryCard } from "../features/categories/components/CategoryCard";
 import { ProductCard } from "../features/products/components/ProductCard";
 import { useProducts } from "../hooks/useProducts";
 import { useSearch } from "../context/SearchContext";
-import logoWatermark from "../assets/logo-vec-icon.png";
+import logoWatermark from "../assets/logo-vec-h-b.png";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -30,9 +30,7 @@ export function ProductsPage() {
     let result = allProducts;
 
     if (query) {
-      result = result.filter((p) =>
-        p.name.toLowerCase().includes(query),
-      );
+      result = result.filter((p) => p.name.toLowerCase().includes(query));
     }
 
     if (selectedCategories.length > 0) {
@@ -64,14 +62,14 @@ export function ProductsPage() {
   };
 
   return (
-    <div className="pt-14 pb-24 px-4 bg-slate-50 min-h-screen relative">
+    <div className="pt-14 pb-24 px-4 bg-white min-h-screen relative">
       <div
-        className="fixed inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `url(${logoWatermark})`,
           backgroundRepeat: "repeat",
-          backgroundSize: "240px",
-          opacity: 0.04,
+          backgroundSize: "200px",
+          opacity: 0.2,
         }}
       />
       <div className="relative z-10">

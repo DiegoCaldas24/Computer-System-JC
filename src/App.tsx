@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { SearchProvider } from "./context/SearchContext";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 
 // --- Main App ---
 export default function App() {
@@ -21,6 +22,8 @@ export default function App() {
       </main>
 
       <Footer />
+
+      <WhatsAppButton />
 
       <style
         dangerouslySetInnerHTML={{

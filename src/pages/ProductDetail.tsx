@@ -2,21 +2,21 @@ import { useState } from "react";
 import { Icons } from "../components/Icons";
 import { Link, useParams } from "react-router-dom";
 import { useProduct } from "../hooks/useProducts";
-import logoWatermark from "../assets/logo-vec-icon.png";
+import logoWatermark from "../assets/logo-vec-h-b.png";
 
 export function ProductDetail() {
   const { product_id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const product = useProduct(Number(product_id));
   return (
-    <div className="pt-16 md:pt-10 pb-20 px-4 md:px-6 max-w-7xl mx-auto relative">
+    <div className="md:pt-16 pb-20 px-4 md:px-6 max-w-7xl mx-auto relative">
       <div
-        className="fixed inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `url(${logoWatermark})`,
           backgroundRepeat: "repeat",
-          backgroundSize: "240px",
-          opacity: 0.04,
+          backgroundSize: "200px",
+          opacity: 0.2,
         }}
       />
       <div className="relative z-10">
@@ -29,7 +29,8 @@ export function ProductDetail() {
             <Icons.ArrowLeft /> Volver
           </Link>
           <div className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 md:gap-2 truncate max-w-[60%] md:max-w-none">
-            <span className="hidden md:inline">Inicio</span> / <span>Productos</span> /{" "}
+            <span className="hidden md:inline">Inicio</span> /{" "}
+            <span>Productos</span> /{" "}
             <span className="truncate">{product?.category}</span>
           </div>
         </div>

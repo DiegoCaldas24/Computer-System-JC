@@ -93,12 +93,11 @@ export default function Footer() {
             href="https://wa.me/51986037556"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-6 py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
+            className="mt-8 flex flex-col items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-6 py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
           >
             <Icons.Whatsapp />
-            <span>
-              Para cualquier consulta o cotización escribir al 986 037 556
-            </span>
+            <span>Para cualquier consulta o cotización escribir al</span>
+            <span>986 037 556</span>
           </a>
         </div>
       </div>

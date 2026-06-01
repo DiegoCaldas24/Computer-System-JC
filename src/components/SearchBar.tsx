@@ -36,7 +36,7 @@ export function SearchBar() {
           placeholder:text-gray-400
           rounded-sm
           pl-9 pr-9
-          h-9 w-64
+          h-9 w-full lg:w-64
           outline-none
           focus:border-[#3b9de8]
           focus:ring-1 focus:ring-[#3b9de8]

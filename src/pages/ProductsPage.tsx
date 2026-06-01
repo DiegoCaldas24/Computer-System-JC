@@ -101,7 +101,7 @@ export function ProductsPage() {
   }, [searchQuery]);
 
   return (
-    <div className="pt-0 pb-24 px-4 bg-slate-50 min-h-screen relative">
+    <div className="pt-14 pb-24 px-4 bg-slate-50 min-h-screen relative">
       <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{

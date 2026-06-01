@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCategories } from "../../../hooks/useCategories";
 
 interface Props {
@@ -10,38 +11,53 @@ export const CategoryCard = ({
   onCategoryChange,
 }: Props) => {
   const categories = useCategories();
-
-  const handleCategoryChange = (categoryId: number, isChecked: boolean) => {
-    onCategoryChange(categoryId, isChecked);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-[#0d1b36] border border-slate-200 rounded-2xl px-4 py-2 text-slate-700 focus:ring-2 focus:ring-sky-500 outline-none transition-all">
-      <span className="pb-4 text-white text-2xl">CATEGORIAS</span>
-      <ul className="pt-4">
-        {categories.map((category) => (
-          <li
-            key={category.category_id}
-            className="text-white flex items-center gap-2 mb-2"
-          >
-            <input
-              type="checkbox"
-              id={`category-${category.category_id}`}
-              checked={selectedCategories.includes(category.category_id)}
-              onChange={(e) =>
-                handleCategoryChange(category.category_id, e.target.checked)
-              }
-              className="cursor-pointer"
-            />
+    <div className="bg-[#0d1b36] border border-slate-200 rounded-2xl px-4 py-3 text-slate-700 transition-all">
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex items-center justify-between w-full md:cursor-default"
+      >
+        <span className="text-white text-lg md:text-2xl font-bold">
+          CATEGORIAS
+        </span>
+        <span className="text-white/60 text-xl md:hidden transition-transform duration-200"
+          style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+        >
+          ▾
+        </span>
+      </button>
+      <div className={`flex md:flex-col gap-2 pt-3 flex-wrap overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0 md:max-h-96"}`}>
+        {categories.map((category) => {
+          const isChecked = selectedCategories.includes(category.category_id);
+          return (
             <label
-              htmlFor={`category-${category.category_id}`}
-              className="cursor-pointer"
+              key={category.category_id}
+              className={`
+                flex items-center gap-2 cursor-pointer transition rounded-lg
+                md:px-0 md:py-0 md:bg-transparent
+                px-3 py-1.5 text-sm rounded-full border
+                ${isChecked
+                  ? "bg-sky-600 text-white border-sky-500 md:bg-transparent md:text-white md:border-0"
+                  : "bg-white/10 text-white/80 border-white/20 md:bg-transparent md:text-white/70 md:border-0"
+                }
+              `}
             >
-              {category.name.toUpperCase()}
+              <input
+                type="checkbox"
+                id={`category-${category.category_id}`}
+                checked={isChecked}
+                onChange={(e) =>
+                  onCategoryChange(category.category_id, e.target.checked)
+                }
+                className="cursor-pointer hidden md:block"
+              />
+              <span>{category.name.toUpperCase()}</span>
             </label>
-          </li>
-        ))}
-      </ul>
+          );
+        })}
+      </div>
     </div>
   );
 };

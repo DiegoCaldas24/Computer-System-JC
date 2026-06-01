@@ -63,10 +63,10 @@ export function ServicePage() {
       />
       <div className="relative z-10">
         {/* HERO */}
-        <section className="max-w-7xl mx-auto px-6 pt-28 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section className="max-w-7xl mx-auto px-4 md:px-6 pt-20 md:pt-28 pb-10 md:pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {/* CAROUSEL */}
-            <div className="relative overflow-hidden rounded-xl h-105 shadow-xl">
+            <div className="relative overflow-hidden rounded-xl h-64 md:h-105 shadow-xl">
               <img
                 src={services[current].image}
                 alt={services[current].title}
@@ -77,16 +77,16 @@ export function ServicePage() {
               <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent" />
 
               {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-center px-10 text-white">
-                <h1 className="text-4xl font-bold leading-tight max-w-md mb-5">
+              <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10 text-white">
+                <h1 className="text-xl md:text-4xl font-bold leading-tight max-w-md mb-3 md:mb-5">
                   {services[current].title}
                 </h1>
 
-                <p className="text-gray-300 max-w-md leading-relaxed mb-6">
+                <p className="text-gray-300 max-w-md leading-relaxed mb-4 md:mb-6 text-xs md:text-base line-clamp-2 md:line-clamp-none">
                   {services[current].description}
                 </p>
 
-                <button className="bg-[#0088d2] hover:bg-[#139ae4] transition-all w-fit px-6 py-3 text-sm font-semibold rounded">
+                <button className="bg-[#0088d2] hover:bg-[#139ae4] transition-all w-fit px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold rounded">
                   Solicitar Servicio
                 </button>
               </div>
@@ -94,38 +94,38 @@ export function ServicePage() {
               {/* Controls */}
               <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 transition w-10 h-10 rounded-full text-white flex items-center justify-center"
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 transition w-8 h-8 md:w-10 md:h-10 rounded-full text-white flex items-center justify-center text-sm md:text-base"
               >
                 ←
               </button>
 
               <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 transition w-10 h-10 rounded-full text-white flex items-center justify-center"
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 transition w-8 h-8 md:w-10 md:h-10 rounded-full text-white flex items-center justify-center text-sm md:text-base"
               >
                 →
               </button>
             </div>
 
             {/* INFO */}
-            <div className="bg-[#07294d] rounded-xl p-10 text-white flex flex-col justify-center shadow-xl">
-              <h2 className="text-4xl font-bold leading-tight mb-6">
+            <div className="bg-[#07294d] rounded-xl p-6 md:p-10 text-white flex flex-col justify-center shadow-xl">
+              <h2 className="text-2xl md:text-4xl font-bold leading-tight mb-4 md:mb-6">
                 Soluciones Tecnológicas Confiables
               </h2>
 
-              <p className="text-gray-300 leading-relaxed mb-8">
+              <p className="text-gray-300 leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
                 Brindamos soporte técnico especializado para empresas y clientes
                 particulares. Nuestro equipo trabaja con rapidez, garantía y
                 tecnología moderna para ofrecer resultados profesionales.
               </p>
 
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 gap-3 md:gap-5">
                 {services.map((service, index) => (
                   <div
                     key={index}
-                    className="bg-white/10 border border-white/10 rounded-lg p-4"
+                    className="bg-white/10 border border-white/10 rounded-lg p-3 md:p-4"
                   >
-                    <h3 className="text-sm font-semibold leading-snug">
+                    <h3 className="text-[10px] md:text-sm font-semibold leading-snug">
                       {service.title}
                     </h3>
                   </div>
@@ -136,7 +136,7 @@ export function ServicePage() {
                 href="https://wa.me/51986037556"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-6 py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
+                className="mt-6 md:mt-8 flex items-center justify-center gap-2 md:gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs md:text-base px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
               >
                 <Icons.Whatsapp />
                 <span>
@@ -149,25 +149,25 @@ export function ServicePage() {
       </div>
 
       {/* GALERÍA */}
-      <section className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="mb-10">
-          <h2 className="text-4xl font-bold text-[#0b1f3a] mb-3">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 pb-20">
+        <div className="mb-6 md:mb-10">
+          <h2 className="text-2xl md:text-4xl font-bold text-[#0b1f3a] mb-2 md:mb-3">
             Nuestros Servicios
           </h2>
 
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm md:text-base">
             Descubre las soluciones tecnológicas que ofrecemos para potenciar y
             proteger tus equipos.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-7">
           {services.map((service, index) => (
             <div
               key={index}
               className="group bg-white rounded-xl overflow-hidden shadow-lg hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="overflow-hidden h-56">
+              <div className="overflow-hidden h-48 md:h-56">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -175,16 +175,16 @@ export function ServicePage() {
                 />
               </div>
 
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-[#0b1f3a] mb-3">
+              <div className="p-4 md:p-6">
+                <h3 className="text-base md:text-xl font-bold text-[#0b1f3a] mb-2 md:mb-3">
                   {service.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
                   {service.description}
                 </p>
 
-                <button className="mt-5 text-[#0088d2] font-semibold hover:underline">
+                <button className="mt-3 md:mt-5 text-[#0088d2] font-semibold hover:underline text-sm md:text-base">
                   Ver más →
                 </button>
               </div>

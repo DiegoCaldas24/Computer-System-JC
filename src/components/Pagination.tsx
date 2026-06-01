@@ -20,7 +20,7 @@ export function Pagination({ totalItems, page, setPage }: Props) {
   const endItem = Math.min(page * itemsPerPage, totalItems);
 
   return (
-    <div className="m-10 flex justify-between items-center">
+    <div className="m-4 md:m-10 flex flex-col md:flex-row justify-between items-center gap-3">
       <p className="text-xs font-medium">
         Mostrando{" "}
         <span className="font-bold">

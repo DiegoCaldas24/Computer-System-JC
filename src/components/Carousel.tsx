@@ -36,11 +36,11 @@ export function Carousel({
       className="
         relative
         w-full
-        h-62.5 sm:h-100
+        h-44 sm:h-72 md:h-100
         overflow-hidden
-        rounded-3xl
+        rounded-xl sm:rounded-3xl
         mx-auto
-        pt-10
+        pt-0 sm:pt-10
       "
     >
       {/* Imagen */}
@@ -65,16 +65,15 @@ export function Carousel({
               flex
               items-center
               justify-center
-              p-6
+              p-0 sm:p-6
             "
           >
             <img
               src={image}
               alt={`slide-${index}`}
               className="
-                max-w-full
-                max-h-full
-                object-contain
+                w-full h-full
+                object-cover sm:object-contain
               "
             />
           </div>
@@ -87,18 +86,18 @@ export function Carousel({
         className="
           absolute
           top-1/2
-          left-4
+          left-1 sm:left-4
           -translate-y-1/2
           bg-black/40
           hover:bg-black/60
           text-white
-          w-10
-          h-10
+          w-7 h-7 sm:w-10 sm:h-10
           rounded-full
           flex
           items-center
           justify-center
           transition
+          text-sm sm:text-base
         "
       >
         ‹
@@ -110,18 +109,18 @@ export function Carousel({
         className="
           absolute
           top-1/2
-          right-4
+          right-1 sm:right-4
           -translate-y-1/2
           bg-black/40
           hover:bg-black/60
           text-white
-          w-10
-          h-10
+          w-7 h-7 sm:w-10 sm:h-10
           rounded-full
           flex
           items-center
           justify-center
           transition
+          text-sm sm:text-base
         "
       >
         ›
@@ -131,11 +130,11 @@ export function Carousel({
       <div
         className="
           absolute
-          bottom-4
+          bottom-2 sm:bottom-4
           left-1/2
           -translate-x-1/2
           flex
-          gap-2
+          gap-1.5 sm:gap-2
         "
       >
         {images.map((_, index) => (
@@ -143,7 +142,8 @@ export function Carousel({
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`
-              w-3 h-3 rounded-full transition
+              rounded-full transition
+              w-2 h-2 sm:w-3 sm:h-3
               ${currentIndex === index ? "bg-white" : "bg-white/50"}
             `}
           />

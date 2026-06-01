@@ -182,31 +182,68 @@ export function HomePage() {
                 </Link>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                {bestSellers.map((product) => (
-                  <div
-                    key={product.name}
-                    className="bg-white rounded-xl border hover:shadow-lg transition"
-                  >
-                    <div className="h-56 flex items-center justify-center p-4">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="max-h-full object-contain"
-                      />
-                    </div>
+              <div className="w-full max-w-full mx-auto px-3 sm:px-5 lg:px-8">
+                <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+                  {bestSellers && bestSellers.length > 0 ? (
+                    bestSellers.map((product) => (
+                      <div className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div className="relative aspect-square overflow-hidden p-3 sm:p-4 flex items-center justify-center bg-slate-50">
+                          <Link to={`/products`}>
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </Link>
+                        </div>
 
-                    <div className="p-5">
-                      <h3 className="font-semibold text-[#0b1f3a]">
-                        {product.name}
-                      </h3>
+                        <div className="p-3 sm:p-4">
+                          <h3 className="font-bold text-slate-800 group-hover:text-sky-600 transition-colors leading-tight truncate">
+                            {product.name}
+                          </h3>
 
-                      <p className="mt-3 text-2xl font-bold text-[#003B73]">
-                        {product.price}
+                          <div className="flex justify-between items-center mt-3 mb-4 gap-2">
+                            <p
+                              className="
+                            text-sm sm:text-lg lg:text-xl
+                            font-black text-slate-900
+                            whitespace-nowrap
+                          "
+                            >
+                              {product.price}
+                            </p>
+                          </div>
+
+                          <div className="flex flex-col gap-2">
+                            <button
+                              className="
+                            w-full border border-slate-300
+                            hover:border-sky-500
+                            hover:bg-sky-50
+                            text-slate-700 hover:text-sky-600
+                            font-semibold
+                            text-xs sm:text-sm
+                            py-2.5 sm:py-3
+                            rounded-xl
+                            transition-all
+                            flex items-center justify-center gap-2
+                          "
+                            >
+                              <Icons.Star />
+                              Añadir al carrito
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-2 lg:col-span-4 py-12 text-center">
+                      <p className="text-slate-500 text-lg">
+                        No hay productos disponibles
                       </p>
                     </div>
-                  </div>
-                ))}
+                  )}
+                </div>
               </div>
             </section>
 
@@ -252,34 +289,45 @@ export function HomePage() {
                 Explora nuestras categorías
               </h2>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                {categories.map((category) => (
-                  <div
-                    key={category.name}
-                    className="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer"
-                  >
-                    <div className="h-48 overflow-hidden">
-                      <img
-                        src={category.image}
-                        alt={category.name}
-                        className=" h-full object-cover hover:scale-110 transition duration-500"
-                      />
-                    </div>
+              <div className="w-full max-w-full mx-auto px-3 sm:px-5 lg:px-8">
+                <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+                  {categories && categories.length > 0 ? (
+                    categories.map((category) => (
+                      <div className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div className="relative aspect-square overflow-hidden p-3 sm:p-4 flex items-center justify-center bg-slate-50">
+                          <Link to={`/products`}>
+                            <img
+                              src={category.image}
+                              alt={category.name}
+                              className="object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </Link>
+                        </div>
 
-                    <div className="p-5">
-                      <h3 className="font-bold text-lg text-[#0b1f3a]">
-                        {category.name}
-                      </h3>
+                        <div className="p-3 sm:p-4">
+                          <h3 className="font-bold text-slate-800 group-hover:text-sky-600 transition-colors leading-tight truncate">
+                            {category.name}
+                          </h3>
 
-                      <Link
-                        to={"/products"}
-                        className="mt-2 text-[#0088d2] font-medium"
-                      >
-                        Ver productos →
-                      </Link>
+                          <div className="flex flex-col gap-2">
+                            <Link
+                              to={"/products"}
+                              className="mt-2 text-[#0088d2] font-medium"
+                            >
+                              Ver productos →
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-2 lg:col-span-4 py-12 text-center">
+                      <p className="text-slate-500 text-lg">
+                        No hay productos disponibles
+                      </p>
                     </div>
-                  </div>
-                ))}
+                  )}
+                </div>
               </div>
             </section>
           </div>

@@ -91,11 +91,14 @@ export function ProductsPage() {
     });
     setPage(1); // Resetear a la primera página
   };
-
+  const prevSearchQuery = useRef(searchQuery);
   // Resetear página cuando cambia la búsqueda
   useEffect(() => {
-    setPage(1);
-  }, [searchQuery, setPage]);
+    if (prevSearchQuery.current !== searchQuery) {
+      prevSearchQuery.current = searchQuery;
+      setPage(1);
+    }
+  }, [searchQuery]);
 
   return (
     <div className="pt-0 pb-24 px-4 bg-slate-50 min-h-screen relative">

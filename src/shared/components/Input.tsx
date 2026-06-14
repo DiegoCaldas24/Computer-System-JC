@@ -1,0 +1,1 @@
+// Placeholder — será implementado cuando se requiera

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCategories } from "../../../hooks/useCategories";
+import { useCategories } from "../hooks/useCategories";
 
 interface Props {
   selectedCategories: number[];
@@ -10,11 +10,11 @@ export const CategoryCard = ({
   selectedCategories,
   onCategoryChange,
 }: Props) => {
-  const categories = useCategories();
+  const { categories } = useCategories();
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-[#0d1b36] border border-slate-200 rounded-2xl px-4 py-3 text-slate-700 transition-all">
+    <div className="bg-[#0d1b36] border border-slate-200 rounded-2xl px-4 py-3 text-white transition-all">
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="flex items-center justify-between w-full md:cursor-default"

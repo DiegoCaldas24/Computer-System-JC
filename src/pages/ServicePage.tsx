@@ -1,8 +1,7 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import logoWatermark from "../assets/logo-vec-icon.png";
-import { Icons } from "../components/Icons";
+import { Carousel } from "../shared/components/Carousel";
+import logoWatermark from "../assets/logos/logo-vec-icon.png";
+import { Icons } from "../shared/components/Icons";
+import { WHATSAPP_URL } from "../shared/constants";
 
 const services = [
   {
@@ -32,23 +31,6 @@ const services = [
 ];
 
 export function ServicePage() {
-  const [current, setCurrent] = useState(0);
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % services.length);
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + services.length) % services.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#e9edf1] relative">
@@ -66,46 +48,31 @@ export function ServicePage() {
         <section className="max-w-7xl mx-auto px-4 md:px-6 pt-20 md:pt-28 pb-10 md:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {/* CAROUSEL */}
-            <div className="relative overflow-hidden rounded-xl h-64 md:h-105 shadow-xl">
-              <img
-                src={services[current].image}
-                alt={services[current].title}
-                className="w-full h-full object-cover"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent" />
-
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10 text-white">
-                <h1 className="text-xl md:text-4xl font-bold leading-tight max-w-md mb-3 md:mb-5">
-                  {services[current].title}
-                </h1>
-
-                <p className="text-gray-300 max-w-md leading-relaxed mb-4 md:mb-6 text-xs md:text-base line-clamp-2 md:line-clamp-none">
-                  {services[current].description}
-                </p>
-
-                <button className="bg-[#0088d2] hover:bg-[#139ae4] transition-all w-fit px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold rounded">
-                  Solicitar Servicio
-                </button>
-              </div>
-
-              {/* Controls */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 transition w-8 h-8 md:w-10 md:h-10 rounded-full text-white flex items-center justify-center text-sm md:text-base"
-              >
-                ←
-              </button>
-
-              <button
-                onClick={nextSlide}
-                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 transition w-8 h-8 md:w-10 md:h-10 rounded-full text-white flex items-center justify-center text-sm md:text-base"
-              >
-                →
-              </button>
-            </div>
+            <Carousel
+              items={services}
+              renderItem={(service) => (
+                <div className="relative w-full h-full">
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10 text-white">
+                    <h1 className="text-xl md:text-4xl font-bold leading-tight max-w-md mb-3 md:mb-5">
+                      {service.title}
+                    </h1>
+                    <p className="text-gray-300 max-w-md leading-relaxed mb-4 md:mb-6 text-xs md:text-base line-clamp-2 md:line-clamp-none">
+                      {service.description}
+                    </p>
+                    <button className="bg-[#0088d2] hover:bg-[#139ae4] transition-all w-fit px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold rounded">
+                      Solicitar Servicio
+                    </button>
+                  </div>
+                </div>
+              )}
+              autoPlay
+              interval={5000}
+              heightClass="h-64 md:h-105"
+              roundedClass="rounded-xl"
+              containerClass="shadow-xl"
+            />
 
             {/* INFO */}
             <div className="bg-[#07294d] rounded-xl p-6 md:p-10 text-white flex flex-col justify-center shadow-xl">
@@ -133,7 +100,7 @@ export function ServicePage() {
               </div>
 
               <a
-                href="https://wa.me/51986037556"
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 md:mt-8 flex items-center justify-center gap-2 md:gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs md:text-base px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import logoWatermark from "../assets/logo-vec-icon.png";
-import { BrandsCarousel } from "../components/BrandsCarousel";
+import logoWatermark from "../assets/logos/logo-vec-icon.png";
+import { BrandsCarousel } from "../features/brands/components/BrandsCarousel";
 import { useEffect, useState } from "react";
-import { Icons } from "../components/Icons";
+import { Icons } from "../shared/components/Icons";
+import { WHATSAPP_URL } from "../shared/constants";
 
 export function HomePage() {
   const featuredProducts = [
@@ -184,9 +185,8 @@ export function HomePage() {
 
               <div className="w-full max-w-full mx-auto px-3 sm:px-5 lg:px-8">
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
-                  {bestSellers && bestSellers.length > 0 ? (
-                    bestSellers.map((product) => (
-                      <div className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
+                  {bestSellers.map((product, index) => (
+                      <div key={index} className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
                         <div className="relative aspect-square overflow-hidden p-3 sm:p-4 flex items-center justify-center bg-slate-50">
                           <Link to={`/products`}>
                             <img
@@ -235,14 +235,7 @@ export function HomePage() {
                           </div>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="col-span-2 lg:col-span-4 py-12 text-center">
-                      <p className="text-slate-500 text-lg">
-                        No hay productos disponibles
-                      </p>
-                    </div>
-                  )}
+                    ))}
                 </div>
               </div>
             </section>
@@ -263,7 +256,7 @@ export function HomePage() {
                   <p className="text-gray-600 mt-2 text-sm md:text-base">Atención especializada.</p>
 
                   <a
-                    href="https://wa.me/51986037556"
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex mt-3 md:mt-4 items-center gap-2 text-[#25D366] font-semibold text-sm md:text-base"
@@ -291,9 +284,8 @@ export function HomePage() {
 
               <div className="w-full max-w-full mx-auto px-3 sm:px-5 lg:px-8">
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
-                  {categories && categories.length > 0 ? (
-                    categories.map((category) => (
-                      <div className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
+                  {categories.map((category, index) => (
+                      <div key={index} className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
                         <div className="relative aspect-square overflow-hidden p-3 sm:p-4 flex items-center justify-center bg-slate-50">
                           <Link to={`/products`}>
                             <img
@@ -319,14 +311,7 @@ export function HomePage() {
                           </div>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="col-span-2 lg:col-span-4 py-12 text-center">
-                      <p className="text-slate-500 text-lg">
-                        No hay productos disponibles
-                      </p>
-                    </div>
-                  )}
+                    ))}
                 </div>
               </div>
             </section>

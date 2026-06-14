@@ -1,4 +1,4 @@
-import { Icons } from "../../../components/Icons";
+import { Icons } from "../../../shared/components/Icons";
 import { Link } from "react-router-dom";
 import type { Product } from "../types/product";
 
@@ -40,7 +40,7 @@ export function ProductCard({ products }: Props) {
                   px-2 py-1 rounded-lg
                 "
                   >
-                    {product.category}
+                    {product.category ? (typeof product.category === 'object' ? product.category.name : product.category) : ''}
                   </span>
 
                   <p

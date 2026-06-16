@@ -1,5 +1,7 @@
 import { Icons } from "../../../shared/components/Icons";
 import { Link } from "react-router-dom";
+import { useCart } from "../../cart/context/CartContext";
+import { useToast } from "../../../shared/hooks/useToast";
 import type { Product } from "../types/product";
 
 interface Props {
@@ -7,6 +9,8 @@ interface Props {
 }
 
 export function ProductCard({ products }: Props) {
+  const { addItem } = useCart();
+  const { toast } = useToast();
   return (
     <div className="w-full max-w-full mx-auto px-3 sm:px-5 lg:px-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
@@ -56,6 +60,7 @@ export function ProductCard({ products }: Props) {
 
                 <div className="flex flex-col gap-2">
                   <button
+                    onClick={() => { addItem(product); toast("Producto añadido al carrito", "success"); }}
                     className="
                   w-full border border-slate-300
                   hover:border-sky-500

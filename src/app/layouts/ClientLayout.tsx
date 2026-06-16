@@ -3,7 +3,9 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { SearchProvider } from "../providers/SearchProvider";
+import { ToastProvider } from "../../shared/components/Toast";
 import { WhatsAppButton } from "./WhatsAppButton";
+import { CartProvider } from "../../features/cart/context/CartContext";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -14,6 +16,8 @@ export default function App() {
 
   return (
     <SearchProvider>
+    <ToastProvider>
+    <CartProvider>
     <div className="min-h-screen bg-white text-slate-800 font-sans selection:bg-sky-100 selection:text-sky-700">
       <Navbar />
       <main>
@@ -40,6 +44,8 @@ export default function App() {
         }}
       />
     </div>
+    </CartProvider>
+    </ToastProvider>
     </SearchProvider>
   );
 }

@@ -3,12 +3,16 @@ import { ErrorState } from "../../../shared/components/ErrorState";
 import { Icons } from "../../../shared/components/Icons";
 import { Link, useParams } from "react-router-dom";
 import { useProduct } from "../hooks/useProducts";
+import { useCart } from "../../cart/context/CartContext";
+import { useToast } from "../../../shared/hooks/useToast";
 import logoWatermark from "../../../assets/logos/logo-vec-h-b.png";
 
 export function ProductDetail() {
   const { product_id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const { product, error } = useProduct(Number(product_id));
+  const { addItem } = useCart();
+  const { toast } = useToast();
 
   if (error) {
     return (
@@ -74,7 +78,7 @@ export function ProductDetail() {
                   </h1>
                   <p className="text-xs md:text-sm text-slate-400 font-bold uppercase">
                     Marca:{" "}
-                    <span className="text-slate-700">{product?.brand ? (typeof product.brand === 'object' ? product.brand.name : product.brand) : ''}</span>
+                    <span className="text-slate-700">{product?.brand ? (typeof product.brand === 'object' ? product.brand.name : product.brand) : '-'}</span>
                   </p>
                 </div>
 
@@ -153,7 +157,12 @@ export function ProductDetail() {
                   </div>
                 </div>
 
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 md:py-4 rounded-xl md:rounded-2xl shadow-lg shadow-blue-100 transition-all text-center flex items-center justify-center gap-3 text-sm md:text-base">
+                <button
+                  onClick={() => {
+                    if (product) { addItem(product, quantity); toast("Producto añadido al carrito", "success"); }
+                  }}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 md:py-4 rounded-xl md:rounded-2xl shadow-lg shadow-blue-100 transition-all text-center flex items-center justify-center gap-3 text-sm md:text-base"
+                >
                   <Icons.ShoppingBag /> Añadir al carrito — ${product?.price}
                 </button>
               </div>

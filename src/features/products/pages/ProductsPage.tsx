@@ -26,7 +26,7 @@ export function ProductsPage() {
 
   const filteredProducts = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    let result = allProducts;
+    let result = allProducts.filter((p) => p.isActive !== false);
 
     if (query) {
       result = result.filter(
@@ -138,6 +138,7 @@ export function ProductsPage() {
                 <Pagination
                   page={page}
                   totalItems={filteredProducts.length}
+                  pageSize={ITEMS_PER_PAGE}
                   setPage={setPage}
                 />
               )}

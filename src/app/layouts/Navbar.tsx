@@ -3,6 +3,8 @@ import logow from "../../assets/logos/logo-vec-w.png";
 import { useState } from "react";
 import { Icons } from "../../shared/components/Icons";
 import { SearchBar } from "../../shared/components/SearchBar";
+import { UserMenu } from "../../shared/components/UserMenu";
+import { useCart } from "../../features/cart/context/CartContext";
 interface NavItem {
   label: string;
   path: string;
@@ -16,6 +18,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <header className="fixed w-full bg-[#0d1b36] text-white shadow-md z-50">
@@ -45,28 +48,21 @@ export default function Navbar() {
             <SearchBar />
 
             {/* Carrito */}
-            <button
+            <Link
+              to="/cart"
               aria-label="Ver carrito"
-              className="
-                text-white
-                hover:text-[#3b9de8]
-                transition-colors
-              "
+              className="relative text-white hover:text-[#3b9de8] transition-colors"
             >
               <Icons.ShoppingCar />
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full min-w-[18px] min-h-[18px] leading-none">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
+            </Link>
 
             {/* Usuario */}
-            <button
-              aria-label="Mi cuenta"
-              className="
-                text-white
-                hover:text-[#3b9de8]
-                transition-colors
-              "
-            >
-              <Icons.User />
-            </button>
+            <UserMenu />
           </div>
           {/* Mobile toggle */}
           <button
@@ -98,18 +94,19 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-4 pt-1">
-            <button
+            <Link
+              to="/cart"
               aria-label="Ver carrito"
-              className="text-gray-300 hover:text-white transition-colors"
+              className="relative text-gray-300 hover:text-white transition-colors"
             >
               <Icons.ShoppingCar />
-            </button>
-            <button
-              aria-label="Mi cuenta"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              <Icons.User />
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full min-w-[18px] min-h-[18px] leading-none">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
+            </Link>
+            <UserMenu />
           </div>
         </div>
       </div>

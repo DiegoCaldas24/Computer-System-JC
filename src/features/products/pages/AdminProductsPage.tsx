@@ -237,14 +237,14 @@ export default function AdminProductsPage() {
             key={label}
             className="bg-white p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
           >
-            <small className="text-slate-500 text-xs">{label}</small>
+            <small className="text-black text-xs">{label}</small>
             <h2 className="text-2xl font-bold mt-1">{value}</h2>
           </div>
         ))}
       </div>
 
       {loading ? (
-        <p className="text-slate-500">Cargando productos...</p>
+        <p className="text-black">Cargando productos...</p>
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
@@ -254,6 +254,7 @@ export default function AdminProductsPage() {
               <thead>
                 <tr className="border-b border-slate-200">
                   {[
+                    "Imagen",
                     "Código",
                     "Producto",
                     "Categoría",
@@ -265,7 +266,7 @@ export default function AdminProductsPage() {
                   ].map((h) => (
                     <th
                       key={h}
-                      className="py-3 px-4 text-sm font-semibold text-slate-600"
+                      className="py-3 px-4 text-sm font-semibold text-black"
                     >
                       {h}
                     </th>
@@ -280,7 +281,20 @@ export default function AdminProductsPage() {
                       p.isActive === false ? "opacity-50" : ""
                     }`}
                   >
-                    <td className="py-3 px-4 font-mono text-xs text-slate-500">
+                    <td className="py-3 px-4 font-mono text-xs text-black">
+                      {p.image ? (
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          className="w-16 h-16 object-contain"
+                        />
+                      ) : (
+                        <div className="w-16 h-16 bg-gray-200 flex items-center justify-center">
+                          <Icons.Truck />
+                        </div>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 font-mono text-xs text-black">
                       {p.code}
                     </td>
                     <td className="py-3 px-4">{p.name}</td>
@@ -343,7 +357,7 @@ export default function AdminProductsPage() {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="py-8 text-center text-slate-400">
+                    <td colSpan={8} className="py-8 text-center text-black">
                       No se encontraron productos
                     </td>
                   </tr>
@@ -375,7 +389,7 @@ export default function AdminProductsPage() {
             </h3>
             {(["name", "price"] as const).map((field) => (
               <label key={field} className="block mb-2.5">
-                <span className="text-sm font-medium text-slate-700 mb-1 block">
+                <span className="text-sm font-medium text-black mb-1 block">
                   {LABELS[field]}
                 </span>
                 <input
@@ -390,7 +404,7 @@ export default function AdminProductsPage() {
               </label>
             ))}
             <label className="block mb-2.5">
-              <span className="text-sm font-medium text-slate-700 mb-1 block">
+              <span className="text-sm font-medium text-black mb-1 block">
                 {LABELS.description}
               </span>
               <textarea
@@ -405,7 +419,7 @@ export default function AdminProductsPage() {
             </label>
 
             <label className="block mb-2.5">
-              <span className="text-sm font-medium text-slate-700 mb-1 block">
+              <span className="text-sm font-medium text-black mb-1 block">
                 URL de imagen
               </span>
               <input
@@ -431,16 +445,16 @@ export default function AdminProductsPage() {
 
             {editing ? (
               <label className="block mb-2.5">
-                <span className="text-sm font-medium text-slate-700 mb-1 block">
+                <span className="text-sm font-medium text-black mb-1 block">
                   Stock actual
                 </span>
-                <div className="w-full border border-slate-200 bg-slate-50 rounded-lg px-3 py-2 text-sm text-slate-600">
+                <div className="w-full border border-slate-200 bg-slate-50 rounded-lg px-3 py-2 text-sm text-black">
                   {editing.stock ?? 0}
                 </div>
               </label>
             ) : (
               <label className="block mb-2.5">
-                <span className="text-sm font-medium text-slate-700 mb-1 block">
+                <span className="text-sm font-medium text-black mb-1 block">
                   {LABELS.stock}
                 </span>
                 <input
@@ -457,7 +471,7 @@ export default function AdminProductsPage() {
             )}
 
             <label className="block mb-2.5">
-              <span className="text-sm font-medium text-slate-700 mb-1 block">
+              <span className="text-sm font-medium text-black mb-1 block">
                 {LABELS.category_id}
               </span>
               <select
@@ -477,7 +491,7 @@ export default function AdminProductsPage() {
             </label>
 
             <label className="block mb-2.5">
-              <span className="text-sm font-medium text-slate-700 mb-1 block">
+              <span className="text-sm font-medium text-black mb-1 block">
                 {LABELS.brand_id}
               </span>
               <select
@@ -516,7 +530,7 @@ export default function AdminProductsPage() {
             <h3 className="text-lg font-bold mb-2">
               {isActivating ? "¿Activar producto?" : "¿Desactivar producto?"}
             </h3>
-            <p className="text-sm text-slate-500 mb-5">
+            <p className="text-sm text-black mb-5">
               {isActivating
                 ? "El producto volverá a estar visible en la tienda."
                 : "El producto dejará de estar visible en la tienda."}
@@ -524,7 +538,7 @@ export default function AdminProductsPage() {
             <div className="flex gap-3 justify-center">
               <button
                 onClick={() => setShowConfirm(null)}
-                className="bg-gray-200 hover:bg-gray-300 text-slate-700 px-5 py-2.5 rounded-lg text-sm font-medium transition"
+                className="bg-gray-200 hover:bg-gray-300 text-black px-5 py-2.5 rounded-lg text-sm font-medium transition"
               >
                 Cancelar
               </button>
@@ -557,7 +571,7 @@ export default function AdminProductsPage() {
             <h3 className="text-lg font-bold mb-4">Aumentar Stock</h3>
 
             <label className="block mb-4">
-              <span className="text-sm font-medium text-slate-700 mb-1 block">
+              <span className="text-sm font-medium text-black mb-1 block">
                 Cantidad a agregar
               </span>
               <input

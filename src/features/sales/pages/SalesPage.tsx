@@ -47,15 +47,15 @@ export default function SalesPage() {
             <thead>
               <tr className="border-b border-slate-200">
                 {["ID", "Cliente", "Total", "Fecha", "Estado"].map((h) => (
-                  <th key={h} className="py-3 px-4 text-sm font-semibold text-slate-600">{h}</th>
+                  <th key={h} className="py-3 px-4 text-sm font-semibold text-black">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={5} className="py-8 text-center text-slate-400">Cargando...</td></tr>
+                <tr><td colSpan={5} className="py-8 text-center text-black">Cargando...</td></tr>
               ) : orders.length === 0 ? (
-                <tr><td colSpan={5} className="py-8 text-center text-slate-400">Sin ventas registradas</td></tr>
+                <tr><td colSpan={5} className="py-8 text-center text-black">Sin ventas registradas</td></tr>
               ) : (
                 orders.slice((page - 1) * pageSize, page * pageSize).map((o) => (
                   <tr key={o.order_id} className="border-b border-slate-100 hover:bg-[#f8f8f8]">

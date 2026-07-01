@@ -60,15 +60,15 @@ export default function CategoriesPage() {
             <thead>
               <tr className="border-b border-slate-200">
                 {["Categoría", "Acciones"].map((h) => (
-                  <th key={h} className="py-3 px-4 text-sm font-semibold text-slate-600">{h}</th>
+                  <th key={h} className="py-3 px-4 text-sm font-semibold text-black">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={2} className="py-8 text-center text-slate-400">Cargando...</td></tr>
+                <tr><td colSpan={2} className="py-8 text-center text-black">Cargando...</td></tr>
               ) : categories.length === 0 ? (
-                <tr><td colSpan={2} className="py-8 text-center text-slate-400">Sin categorías</td></tr>
+                <tr><td colSpan={2} className="py-8 text-center text-black">Sin categorías</td></tr>
               ) : (
                 categories.slice((page - 1) * pageSize, page * pageSize).map((c) => (
                   <tr key={c.category_id} className="border-b border-slate-100 hover:bg-[#f8f8f8]">
@@ -98,7 +98,7 @@ export default function CategoriesPage() {
             <h3 className="text-lg font-bold mb-4">Nueva Categoría</h3>
 
             <label className="block mb-4">
-              <span className="text-sm font-medium text-slate-700 mb-1 block">Nombre</span>
+              <span className="text-sm font-medium text-black mb-1 block">Nombre</span>
               <input
                 placeholder="Nombre de la categoría"
                 value={name}

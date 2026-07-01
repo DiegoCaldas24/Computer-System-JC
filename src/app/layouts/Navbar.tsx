@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logow from "../../assets/logos/logo-vec-w.png";
 import { useState } from "react";
 import { Icons } from "../../shared/components/Icons";
@@ -19,6 +19,10 @@ const NAV_ITEMS: NavItem[] = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { totalItems } = useCart();
+  const { pathname } = useLocation();
+
+  const isActive = (path: string) =>
+    path === "/" ? pathname === "/" : pathname.startsWith(path);
 
   return (
     <header className="fixed w-full bg-[#0d1b36] text-white shadow-md z-50">
@@ -37,7 +41,7 @@ export default function Navbar() {
           <nav className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map(({ label, path }) => (
               <Link key={path} to={path}>
-                <span className="px-3 py-1 block">{label}</span>
+                <span className={`px-3 py-1 block transition-colors ${isActive(path) ? "text-[#3b9de8]" : "text-white hover:text-[#3b9de8]"}`}>{label}</span>
               </Link>
             ))}
           </nav>
@@ -87,7 +91,7 @@ export default function Navbar() {
 
           <nav className="flex flex-col gap-1">
             {NAV_ITEMS.map(({ label, path }) => (
-              <Link key={path} to={path} onClick={() => setIsOpen(false)}>
+              <Link key={path} to={path} onClick={() => setIsOpen(false)} className={`transition-colors ${isActive(path) ? "text-[#3b9de8]" : "text-white hover:text-[#3b9de8]"}`}>
                 {label}
               </Link>
             ))}

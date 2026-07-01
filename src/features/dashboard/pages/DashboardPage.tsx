@@ -20,7 +20,7 @@ export default function DashboardPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="text-slate-500">Cargando dashboard...</p>;
+  if (loading) return <p className="text-black">Cargando dashboard...</p>;
 
   const cards = [
     { label: "Total Productos", value: stats?.totalProducts ?? 0 },
@@ -39,7 +39,7 @@ export default function DashboardPage() {
             key={label}
             className="bg-white p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
           >
-            <small className="text-slate-500 text-xs">{label}</small>
+            <small className="text-black text-xs">{label}</small>
             <h2 className="text-2xl font-bold mt-1">{value}</h2>
           </div>
         ))}

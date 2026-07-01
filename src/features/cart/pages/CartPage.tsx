@@ -9,7 +9,7 @@ export default function CartPage() {
     return (
       <div className="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center gap-4 pt-14">
         <Icons.ShoppingCar />
-        <p className="text-slate-500 text-lg">Tu carrito está vacío</p>
+        <p className="text-black text-lg">Tu carrito está vacío</p>
         <Link
           to="/products"
           className="bg-[#1144b5] hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition"
@@ -37,19 +37,19 @@ export default function CartPage() {
             />
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-slate-800 truncate">{product.name}</p>
-              <p className="text-sm text-slate-500">S/ {product.price.toFixed(2)}</p>
+              <p className="text-sm text-black">S/ {product.price.toFixed(2)}</p>
             </div>
             <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden">
               <button
                 onClick={() => updateQuantity(product.product_id, Math.max(1, quantity - 1))}
-                className="p-2 text-slate-600 hover:bg-slate-100 transition-colors"
+                className="p-2 text-black hover:bg-slate-100 transition-colors"
               >
                 <Icons.Minus />
               </button>
               <span className="px-3 font-semibold text-sm">{quantity}</span>
               <button
                 onClick={() => updateQuantity(product.product_id, quantity + 1)}
-                className="p-2 text-slate-600 hover:bg-slate-100 transition-colors"
+                className="p-2 text-black hover:bg-slate-100 transition-colors"
               >
                 <Icons.Plus />
               </button>

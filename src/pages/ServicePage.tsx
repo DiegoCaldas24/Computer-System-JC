@@ -58,7 +58,7 @@ export function ServicePage() {
                     <h1 className="text-xl md:text-4xl font-bold leading-tight max-w-md mb-3 md:mb-5">
                       {service.title}
                     </h1>
-                    <p className="text-gray-300 max-w-md leading-relaxed mb-4 md:mb-6 text-xs md:text-base line-clamp-2 md:line-clamp-none">
+                    <p className="text-white max-w-md leading-relaxed mb-4 md:mb-6 text-xs md:text-base line-clamp-2 md:line-clamp-none">
                       {service.description}
                     </p>
                     <button className="bg-[#0088d2] hover:bg-[#139ae4] transition-all w-fit px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold rounded">
@@ -80,7 +80,7 @@ export function ServicePage() {
                 Soluciones Tecnológicas Confiables
               </h2>
 
-              <p className="text-gray-300 leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
+              <p className="text-white leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
                 Brindamos soporte técnico especializado para empresas y clientes
                 particulares. Nuestro equipo trabaja con rapidez, garantía y
                 tecnología moderna para ofrecer resultados profesionales.
@@ -122,7 +122,7 @@ export function ServicePage() {
             Nuestros Servicios
           </h2>
 
-          <p className="text-gray-600 text-sm md:text-base">
+          <p className="text-black text-sm md:text-base">
             Descubre las soluciones tecnológicas que ofrecemos para potenciar y
             proteger tus equipos.
           </p>
@@ -147,7 +147,7 @@ export function ServicePage() {
                   {service.title}
                 </h3>
 
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
+                <p className="text-black text-xs md:text-sm leading-relaxed">
                   {service.description}
                 </p>
 

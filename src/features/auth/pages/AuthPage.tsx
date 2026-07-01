@@ -172,7 +172,7 @@ export default function AuthPage() {
               <button
                 type="button"
                 onClick={() => toggle("login")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-black/50 hover:text-black"
               >
                 <Eye visible={showPasswords.login} />
               </button>
@@ -226,7 +226,7 @@ export default function AuthPage() {
               <button
                 type="button"
                 onClick={() => toggle("regPass")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-black/50 hover:text-black"
               >
                 <Eye visible={showPasswords.regPass} />
               </button>
@@ -243,7 +243,7 @@ export default function AuthPage() {
               <button
                 type="button"
                 onClick={() => toggle("regConfirm")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-black/50 hover:text-black"
               >
                 <Eye visible={showPasswords.regConfirm} />
               </button>
@@ -259,7 +259,7 @@ export default function AuthPage() {
           </form>
         )}
 
-        <p className="text-center text-sm text-slate-500 mt-5">
+        <p className="text-center text-sm text-black mt-5">
           {isLogin ? "¿No tienes una cuenta?" : "¿Ya tienes una cuenta?"}{" "}
           <button
             type="button"

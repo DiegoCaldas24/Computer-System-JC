@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Carousel } from "../../../shared/components/Carousel";
 import { ErrorState } from "../../../shared/components/ErrorState";
 import { Pagination } from "../../../shared/components/Pagination";
+import { BrandsCard } from "../../brands/components/BrandsCard";
 import { CategoryCard } from "../../categories/components/CategoryCard";
 import { ProductCard } from "../components/ProductCard";
 import { useProducts } from "../hooks/useProducts";
@@ -13,6 +14,7 @@ const ITEMS_PER_PAGE = 8;
 export function ProductsPage() {
   const [page, setPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<number[]>([]);
   const { searchQuery } = useSearch();
 
   const { products: allProducts, error: productsError } = useProducts();
@@ -43,8 +45,14 @@ export function ProductsPage() {
       );
     }
 
+    if (selectedBrands.length > 0) {
+      result = result.filter((p) =>
+        selectedBrands.includes(p.brand_id || 0),
+      );
+    }
+
     return result;
-  }, [searchQuery, allProducts, selectedCategories]);
+  }, [searchQuery, allProducts, selectedCategories, selectedBrands]);
 
   const hasSearched = searchQuery.trim().length > 0;
 
@@ -58,6 +66,17 @@ export function ProductsPage() {
         return [...prev, categoryId];
       } else {
         return prev.filter((id) => id !== categoryId);
+      }
+    });
+    setPage(1);
+  };
+
+  const handleBrandChange = (brandId: number, isChecked: boolean) => {
+    setSelectedBrands((prev) => {
+      if (isChecked) {
+        return [...prev, brandId];
+      } else {
+        return prev.filter((id) => id !== brandId);
       }
     });
     setPage(1);
@@ -89,15 +108,19 @@ export function ProductsPage() {
         />
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row gap-8">
-            <div className="w-full md:w-64 shrink-0">
+            <div className="w-full md:w-64 shrink-0 flex flex-col gap-4">
               <CategoryCard
                 selectedCategories={selectedCategories}
                 onCategoryChange={handleCategoryChange}
               />
+              <BrandsCard
+                selectedBrands={selectedBrands}
+                onBrandChange={handleBrandChange}
+              />
             </div>
 
             <div className="flex-1">
-              <div className="mb-4 text-slate-600">
+              <div className="mb-4 text-black">
                 <p className="text-sm">
                   {hasSearched && filteredProducts.length === 0 && (
                     <>No se encontraron productos para "</>
@@ -126,7 +149,7 @@ export function ProductsPage() {
 
               {hasSearched && filteredProducts.length === 0 && (
                 <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-slate-600 text-center">
+                  <p className="text-black text-center">
                     No se encontraron productos
                   </p>
                 </div>

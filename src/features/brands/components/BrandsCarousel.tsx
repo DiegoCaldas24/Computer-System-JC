@@ -46,7 +46,7 @@ export function BrandsCarousel() {
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-bold text-gray-900">Marcas Aliadas</h2>
 
-          <p className="mt-3 text-gray-500">
+          <p className="mt-3 text-black">
             Trabajamos con las principales marcas del mercado
           </p>
         </div>

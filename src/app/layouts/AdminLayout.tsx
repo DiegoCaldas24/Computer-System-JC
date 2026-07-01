@@ -49,7 +49,7 @@ export default function AdminLayout() {
         <div className="mt-auto pt-4 border-t border-slate-700 space-y-1">
           <Link
             to="/"
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors w-full px-4 py-2 rounded-lg hover:bg-[#1144b5]"
+            className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors w-full px-4 py-2 rounded-lg hover:bg-[#1144b5]"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -59,7 +59,7 @@ export default function AdminLayout() {
           </Link>
           <button
             onClick={async () => { await signOut(); navigate("/"); }}
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors w-full cursor-pointer px-4 py-2 rounded-lg hover:bg-[#1144b5]"
+            className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors w-full cursor-pointer px-4 py-2 rounded-lg hover:bg-[#1144b5]"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

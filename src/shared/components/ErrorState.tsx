@@ -9,7 +9,7 @@ export function ErrorState({ message = "Error al cargar los datos" }: Props) {
         <span className="text-red-500 text-2xl font-bold">!</span>
       </div>
       <p className="text-red-600 font-semibold text-lg">{message}</p>
-      <p className="text-slate-400 text-sm mt-2">Intenta recargar la página más tarde.</p>
+      <p className="text-black text-sm mt-2">Intenta recargar la página más tarde.</p>
     </div>
   );
 }

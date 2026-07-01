@@ -27,7 +27,7 @@ export function Pagination({
 
   return (
     <div className="flex items-center justify-between pt-4">
-      <span className="text-sm text-slate-500">
+      <span className="text-sm text-black">
         {total} registro{total !== 1 ? "s" : ""}
       </span>
       <div className="flex gap-1.5">

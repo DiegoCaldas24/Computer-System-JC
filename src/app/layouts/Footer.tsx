@@ -4,7 +4,7 @@ import { WHATSAPP_URL } from "../../shared/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0d1b36] text-slate-600 py-8 border-t border-gray-200">
+    <footer className="bg-[#0d1b36] text-white py-8 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="space-y-4">
           <div className="flex items-center">

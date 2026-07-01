@@ -25,7 +25,7 @@ export function SearchBar() {
           bg-[#0F2D57]
           border border-[#1E4C84]
           text-sm text-white
-          placeholder:text-gray-400
+          placeholder:text-gray-500
           rounded-sm
           pl-9 pr-9
           h-9 w-full lg:w-64
@@ -40,7 +40,7 @@ export function SearchBar() {
         <button
           type="button"
           onClick={handleClear}
-          className="absolute right-2 text-gray-400 hover:text-white transition-colors"
+          className="absolute right-2 text-white/70 hover:text-white transition-colors"
           aria-label="Limpiar búsqueda"
         >
           ✕

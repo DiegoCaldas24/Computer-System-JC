@@ -65,7 +65,7 @@ export function ProductCard({ products }: Props) {
                   w-full border border-slate-300
                   hover:border-sky-500
                   hover:bg-sky-50
-                  text-slate-700 hover:text-sky-600
+                  text-black hover:text-sky-600
                   font-semibold
                   text-xs sm:text-sm
                   py-2.5 sm:py-3
@@ -83,7 +83,7 @@ export function ProductCard({ products }: Props) {
           ))
         ) : (
           <div className="col-span-2 lg:col-span-4 py-12 text-center">
-            <p className="text-slate-500 text-lg">
+            <p className="text-slate-800 text-lg">
               No hay productos disponibles
             </p>
           </div>

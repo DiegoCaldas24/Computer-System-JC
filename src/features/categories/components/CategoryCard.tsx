@@ -29,9 +29,7 @@ export const CategoryCard = ({
           ▾
         </span>
       </button>
-      <div
-        className={`flex md:flex-col gap-2 pt-3 flex-wrap overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0 md:max-h-96"}`}
-      >
+      <div className={`flex md:flex-col gap-2 pt-3 `}>
         {categories.map((category) => {
           const isChecked = selectedCategories.includes(category.category_id);
           return (

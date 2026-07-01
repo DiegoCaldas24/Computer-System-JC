@@ -25,7 +25,7 @@ export function ProductDetail() {
   if (!product) {
     return (
       <div className="md:pt-16 pb-20 px-4 md:px-6 max-w-7xl mx-auto relative min-h-screen flex items-center justify-center">
-        <p className="text-slate-400 text-lg">Cargando...</p>
+        <p className="text-slate-800 text-lg">Cargando...</p>
       </div>
     );
   }
@@ -44,11 +44,11 @@ export function ProductDetail() {
         <div className="flex flex-wrap items-center justify-between gap-2 md:gap-4 mb-4">
           <Link
             to={"/products"}
-            className="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition-colors font-bold text-xs md:text-sm bg-white py-2 px-3 md:px-4 rounded-xl border border-slate-100 shadow-sm"
+            className="flex items-center gap-2 text-slate-800 hover:text-blue-600 transition-colors font-bold text-xs md:text-sm bg-white py-2 px-3 md:px-4 rounded-xl border border-slate-100 shadow-sm"
           >
             <Icons.ArrowLeft /> Volver
           </Link>
-          <div className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 md:gap-2 truncate max-w-[60%] md:max-w-none">
+          <div className="text-[10px] md:text-xs text-slate-800 font-bold uppercase tracking-wider flex items-center gap-1 md:gap-2 truncate max-w-[60%] md:max-w-none">
             <span className="hidden md:inline">Inicio</span> /{" "}
             <span>Productos</span> /{" "}
             <span className="truncate">{product?.category ? (typeof product.category === 'object' ? product.category.name : product.category) : ''}</span>
@@ -76,20 +76,20 @@ export function ProductDetail() {
                   <h1 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight">
                     {product?.name}
                   </h1>
-                  <p className="text-xs md:text-sm text-slate-400 font-bold uppercase">
+                  <p className="text-xs md:text-sm text-slate-800 font-bold uppercase">
                     Marca:{" "}
-                    <span className="text-slate-700">{product?.brand ? (typeof product.brand === 'object' ? product.brand.name : product.brand) : '-'}</span>
+                    <span className="text-black">{product?.brand ? (typeof product.brand === 'object' ? product.brand.name : product.brand) : '-'}</span>
                   </p>
                 </div>
 
                 <div className="text-2xl md:text-3xl font-black text-blue-600">
                   ${product?.price}
-                  <span className="text-[10px] md:text-xs text-slate-400 font-medium block mt-1">
+                  <span className="text-[10px] md:text-xs text-slate-800 font-medium block mt-1">
                     Precio sugerido con IGV incluido
                   </span>
                 </div>
 
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                <p className="text-slate-800 text-sm md:text-base leading-relaxed">
                   {product?.description}
                 </p>
 
@@ -101,7 +101,7 @@ export function ProductDetail() {
                     <span className="text-[10px] md:text-xs font-bold text-slate-800">
                       Envío Gratis
                     </span>
-                    <span className="text-[9px] md:text-[10px] text-slate-400">
+                    <span className="text-[9px] md:text-[10px] text-slate-800">
                       Todo el país
                     </span>
                   </div>
@@ -112,7 +112,7 @@ export function ProductDetail() {
                     <span className="text-[10px] md:text-xs font-bold text-slate-800">
                       12 Meses
                     </span>
-                    <span className="text-[9px] md:text-[10px] text-slate-400">
+                    <span className="text-[9px] md:text-[10px] text-slate-800">
                       Garantía Real
                     </span>
                   </div>
@@ -123,7 +123,7 @@ export function ProductDetail() {
                     <span className="text-[10px] md:text-xs font-bold text-slate-800">
                       Devoluciones
                     </span>
-                    <span className="text-[9px] md:text-[10px] text-slate-400">
+                    <span className="text-[9px] md:text-[10px] text-slate-800">
                       Hasta 30 días
                     </span>
                   </div>
@@ -135,7 +135,7 @@ export function ProductDetail() {
                   <div className="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
                     <button
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="p-2 md:p-3 text-slate-600 hover:bg-slate-200 transition-colors"
+                      className="p-2 md:p-3 text-slate-800 hover:bg-slate-200 transition-colors"
                     >
                       <Icons.Minus />
                     </button>
@@ -144,12 +144,12 @@ export function ProductDetail() {
                     </span>
                     <button
                       onClick={() => setQuantity((q) => q + 1)}
-                      className="p-2 md:p-3 text-slate-600 hover:bg-slate-200 transition-colors"
+                      className="p-2 md:p-3 text-slate-800 hover:bg-slate-200 transition-colors"
                     >
                       <Icons.Plus />
                     </button>
                   </div>
-                  <div className="text-[10px] md:text-xs text-slate-400 font-medium">
+                  <div className="text-[10px] md:text-xs text-slate-800 font-medium">
                     <span className="text-emerald-500 font-bold block">
                       ✓ Stock Disponible
                     </span>

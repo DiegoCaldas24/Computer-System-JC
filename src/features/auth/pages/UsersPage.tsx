@@ -46,7 +46,7 @@ export default function UsersPage() {
                 {["Nombre", "Correo", "Rol", "Estado", "Acciones"].map((h) => (
                   <th
                     key={h}
-                    className="py-3 px-4 text-sm font-semibold text-slate-600"
+                    className="py-3 px-4 text-sm font-semibold text-black"
                   >
                     {h}
                   </th>
@@ -56,13 +56,13 @@ export default function UsersPage() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-slate-400">
+                  <td colSpan={5} className="py-8 text-center text-black">
                     Cargando...
                   </td>
                 </tr>
               ) : users.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-slate-400">
+                  <td colSpan={5} className="py-8 text-center text-black">
                     Sin usuarios
                   </td>
                 </tr>

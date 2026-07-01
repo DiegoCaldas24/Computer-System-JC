@@ -72,7 +72,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, dispatch] = useReducer(cartReducer, []);
   const [cartId, setCartId] = useState<number | null>(null);
   const isHydrating = useRef(true);
-  const syncTimer = useRef<ReturnType<typeof setTimeout>>();
+  const syncTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const init = async () => {

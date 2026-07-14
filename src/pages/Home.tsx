@@ -4,8 +4,11 @@ import { BrandsCarousel } from "../features/brands/components/BrandsCarousel";
 import { useEffect, useState } from "react";
 import { Icons } from "../shared/components/Icons";
 import { WHATSAPP_URL } from "../shared/constants";
+import { CommentModal } from "../features/comments/components/CommentModal";
+import { PublicCommentsSection } from "../features/comments/components/PublicCommentsSection";
 
 export function HomePage() {
+  const [showCommentModal, setShowCommentModal] = useState(false);
   const featuredProducts = [
     {
       title: "Mouse Logitech M170 B",
@@ -174,7 +177,86 @@ export function HomePage() {
                 </video>
               </div>
             </section>
+            {/* MISIÓN Y VISIÓN */}
+            <section className="bg-white py-16 md:py-12">
+              <div className="max-w-7xl mx-auto px-4">
+                <div className="text-center mb-12 md:mb-16">
+                  <h2 className="text-3xl md:text-5xl font-bold text-[#0b1f3a]">
+                    Nuestra Empresa
+                  </h2>
+                  <div className="w-20 h-1 bg-[#0088d2] mx-auto mt-4 rounded-full" />
+                </div>
 
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+                  <div className="bg-[#f8fafc] rounded-2xl p-8 md:p-10 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex flex-row items-center gap-4 mb-6">
+                      <div className="w-14 h-14 bg-[#0088d2]/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg
+                          className="w-7 h-7 text-[#0088d2]"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-[#0b1f3a] mb-4">
+                        Misión
+                      </h3>
+                    </div>
+                    <p className="text-black leading-relaxed text-base md:text-lg">
+                      Ser la primera opción de nuestros clientes cuando piensan
+                      en tecnología. Nos dedicamos a ofrecer productos de calidad,
+                      atención personalizada y soluciones informáticas que realmente
+                      resuelvan sus necesidades, porque sabemos que detrás de cada
+                      equipo hay una persona, un emprendimiento o una familia que
+                      confía en nosotros.
+                    </p>
+                  </div>
+
+                  <div className="bg-[#f8fafc] rounded-2xl p-8 md:p-10 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex flex-row items-center gap-4 mb-6">
+                      <div className="w-14 h-14 bg-[#0088d2]/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg
+                          className="w-7 h-7 text-[#0088d2]"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-[#0b1f3a] mb-4">
+                        Visión
+                      </h3>
+                    </div>
+                    <p className="text-black leading-relaxed text-base md:text-lg">
+                      Ser reconocidos como la primera opción de confianza para
+                      nuestros clientes, donde cada persona se sienta respaldada
+                      y asesorada en sus decisiones tecnológicas. Queremos
+                      construir relaciones duraderas basadas en la honestidad,
+                      el buen servicio y el compromiso genuino de ayudar a
+                      quienes confían en nosotros.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
             {/* MÁS VENDIDOS */}
             <section className="mt-10 md:mt-16">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-8 gap-2">
@@ -344,6 +426,25 @@ export function HomePage() {
           </div>
         </div>
         <BrandsCarousel />
+
+        <PublicCommentsSection />
+
+        {/* Comentarios */}
+        <button
+          onClick={() => setShowCommentModal(true)}
+          className="fixed bottom-6 left-6 z-40 bg-[#0088d2] hover:bg-[#169de7] text-white pl-4 pr-5 h-14 rounded-full shadow-2xl flex items-center justify-center gap-2.5 transition-all hover:scale-105 hover:shadow-[#0088d2]/25 animate-pulse shadow-[#0088d2]/20"
+          aria-label="Dejar comentario"
+        >
+          <svg className="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          <span className="text-sm font-semibold whitespace-nowrap">Deja tu comentario</span>
+        </button>
+
+        <CommentModal
+          open={showCommentModal}
+          onClose={() => setShowCommentModal(false)}
+        />
       </div>
     </div>
   );

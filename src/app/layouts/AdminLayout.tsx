@@ -9,6 +9,8 @@ const NAV_ITEMS = [
   { label: "Productos", icon: <Icons.Laptop />, to: "/admin/products" },
   { label: "Categorías", icon: <Icons.Menu />, to: "/admin/categories" },
   { label: "Marcas", icon: <Icons.Shield />, to: "/admin/brands" },
+  { label: "Comentarios", icon: <Icons.MessageCircle />, to: "/admin/comments" },
+  { label: "Conversaciones", icon: <Icons.MessageCircle />, to: "/admin/conversaciones" },
   { label: "Usuarios", icon: <Icons.User />, to: "/admin/users" },
 ];
 

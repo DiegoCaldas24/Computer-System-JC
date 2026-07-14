@@ -210,8 +210,8 @@ export default function AuthPage() {
             />
             <input
               name="phone"
-              type="number"
-              placeholder="Teléfono (opcional)"
+              type="tel"
+              placeholder="Celular (opcional)"
               className={`${inputClass} mt-3`}
             />
 

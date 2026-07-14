@@ -51,7 +51,13 @@ export function ProductDetail() {
           <div className="text-[10px] md:text-xs text-slate-800 font-bold uppercase tracking-wider flex items-center gap-1 md:gap-2 truncate max-w-[60%] md:max-w-none">
             <span className="hidden md:inline">Inicio</span> /{" "}
             <span>Productos</span> /{" "}
-            <span className="truncate">{product?.category ? (typeof product.category === 'object' ? product.category.name : product.category) : ''}</span>
+            <span className="truncate">
+              {product?.category
+                ? typeof product.category === "object"
+                  ? product.category.name
+                  : product.category
+                : ""}
+            </span>
           </div>
         </div>
 
@@ -71,19 +77,29 @@ export function ProductDetail() {
               <div className="space-y-4 md:space-y-6">
                 <div className="space-y-2">
                   <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                    {product?.category ? (typeof product.category === 'object' ? product.category.name : product.category) : ''}
+                    {product?.category
+                      ? typeof product.category === "object"
+                        ? product.category.name
+                        : product.category
+                      : ""}
                   </span>
                   <h1 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight">
                     {product?.name}
                   </h1>
                   <p className="text-xs md:text-sm text-slate-800 font-bold uppercase">
                     Marca:{" "}
-                    <span className="text-black">{product?.brand ? (typeof product.brand === 'object' ? product.brand.name : product.brand) : '-'}</span>
+                    <span className="text-black">
+                      {product?.brand
+                        ? typeof product.brand === "object"
+                          ? product.brand.name
+                          : product.brand
+                        : "-"}
+                    </span>
                   </p>
                 </div>
 
                 <div className="text-2xl md:text-3xl font-black text-blue-600">
-                  ${product?.price}
+                  S/. {product?.price}
                   <span className="text-[10px] md:text-xs text-slate-800 font-medium block mt-1">
                     Precio sugerido con IGV incluido
                   </span>
@@ -159,11 +175,14 @@ export function ProductDetail() {
 
                 <button
                   onClick={() => {
-                    if (product) { addItem(product, quantity); toast("Producto añadido al carrito", "success"); }
+                    if (product) {
+                      addItem(product, quantity);
+                      toast("Producto añadido al carrito", "success");
+                    }
                   }}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 md:py-4 rounded-xl md:rounded-2xl shadow-lg shadow-blue-100 transition-all text-center flex items-center justify-center gap-3 text-sm md:text-base"
                 >
-                  <Icons.ShoppingBag /> Añadir al carrito — ${product?.price}
+                  <Icons.ShoppingBag /> Añadir al carrito — S/. {product?.price}
                 </button>
               </div>
             </div>

@@ -98,6 +98,24 @@ export function UserMenu({ variant = "light", onlyLogout }: UserMenuProps) {
                   Mi Perfil
                 </Link>
               )}
+              {!onlyLogout && (
+                <Link
+                  to="/mis-comentarios"
+                  onClick={() => setOpen(false)}
+                  className={`block px-4 py-2 text-sm ${itemHover} transition-colors`}
+                >
+                  Mis comentarios
+                </Link>
+              )}
+              {!onlyLogout && (
+                <Link
+                  to="/mis-consultas"
+                  onClick={() => setOpen(false)}
+                  className={`block px-4 py-2 text-sm ${itemHover} transition-colors`}
+                >
+                  Mis consultas
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
                 className={`block w-full text-left px-4 py-2 text-sm ${itemHover} transition-colors`}

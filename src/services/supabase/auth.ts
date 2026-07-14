@@ -48,9 +48,43 @@ export async function createProfile(profile: {
 export async function getProfile(userId: string) {
   const { data, error } = await supabase
     .from("profiles")
-    .select("first_name, last_name, rol_id")
+    .select("first_name, last_name, email, phone, rol_id")
     .eq("user_id", userId)
     .single();
   if (error) throw error;
-  return data;
+  return data as {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string | null;
+    rol_id: number;
+  };
+}
+
+export async function getProfileAddress(userId: string) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("address, city, department")
+    .eq("user_id", userId)
+    .single();
+  if (error) return { address: null, city: null, department: null };
+  return data as { address: string | null; city: string | null; department: string | null };
+}
+
+export async function updateProfile(
+  userId: string,
+  updates: Partial<{
+    first_name: string;
+    last_name: string;
+    phone: string;
+    address: string;
+    city: string;
+    department: string;
+  }>,
+) {
+  const { error } = await supabase
+    .from("profiles")
+    .update(updates)
+    .eq("user_id", userId);
+  if (error) throw error;
 }

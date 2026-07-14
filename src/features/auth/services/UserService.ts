@@ -10,7 +10,7 @@ export async function getAllUsers() {
   const { data, error } = await supabase
     .from("profiles")
     .select("user_id, first_name, last_name, email, rol_id, status")
-    .eq("rol_id", 2);
+    .order("rol_id", { ascending: true });
   if (error) throw error;
   return (data ?? []).map((p) => ({
     user_id: p.user_id,

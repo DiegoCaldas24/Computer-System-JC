@@ -2,6 +2,8 @@ import { Carousel } from "../shared/components/Carousel";
 import logoWatermark from "../assets/logos/logo-vec-icon.png";
 import { Icons } from "../shared/components/Icons";
 import { WHATSAPP_URL } from "../shared/constants";
+import { useState } from "react";
+import { ContactModal } from "../features/conversations/components/ContactModal";
 
 const services = [
   {
@@ -31,8 +33,10 @@ const services = [
 ];
 
 export function ServicePage() {
+  const [showContact, setShowContact] = useState(false);
 
   return (
+    <>
     <div className="min-h-screen bg-[#e9edf1] relative">
       <div
         className="fixed inset-0 pointer-events-none z-0"
@@ -99,11 +103,21 @@ export function ServicePage() {
                 ))}
               </div>
 
+              <button
+                onClick={() => setShowContact(true)}
+                className="mt-6 md:mt-8 w-full flex items-center justify-center gap-2 md:gap-3 bg-[#0088d2] hover:bg-[#169de7] text-white font-bold text-xs md:text-base px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                <span>Contáctanos</span>
+              </button>
+
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 md:mt-8 flex items-center justify-center gap-2 md:gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs md:text-base px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
+                className="mt-3 md:mt-4 flex items-center justify-center gap-2 md:gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs md:text-base px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1"
               >
                 <Icons.Whatsapp />
                 <span>
@@ -159,6 +173,12 @@ export function ServicePage() {
           ))}
         </div>
       </section>
-    </div>
+      </div>
+
+      <ContactModal
+        open={showContact}
+        onClose={() => setShowContact(false)}
+      />
+    </>
   );
 }

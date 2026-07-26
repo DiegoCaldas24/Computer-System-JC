@@ -6,6 +6,7 @@ import { Icons } from "../shared/components/Icons";
 import { WHATSAPP_URL } from "../shared/constants";
 import { CommentModal } from "../features/comments/components/CommentModal";
 import { PublicCommentsSection } from "../features/comments/components/PublicCommentsSection";
+import { Timeline } from "../shared/components/Timeline";
 
 export function HomePage() {
   const [showCommentModal, setShowCommentModal] = useState(false);
@@ -428,6 +429,8 @@ export function HomePage() {
         <BrandsCarousel />
 
         <PublicCommentsSection />
+
+        <Timeline />
 
         {/* Comentarios */}
         <button

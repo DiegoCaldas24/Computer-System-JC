@@ -88,9 +88,10 @@ export function ProductsPage() {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: `url(${logoWatermark})`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "200px",
-          opacity: 0.2,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "contain",
+          opacity: 0.12,
         }}
       />
       <div className="relative z-10">

@@ -9,6 +9,7 @@ import PublicCommentsPage from "../../features/comments/pages/PublicCommentsPage
 import ProfilePage from "../../features/profile/pages/ProfilePage";
 import MyConversationsPage from "../../features/conversations/pages/MyConversationsPage";
 import AdminConversationsPage from "../../features/conversations/pages/AdminConversationsPage";
+import AdminCarouselsPage from "../../features/carousels/pages/AdminCarouselsPage";
 
 import App from "../layouts/ClientLayout";
 import AdminLayout from "../layouts/AdminLayout";
@@ -103,6 +104,10 @@ export const router = createBrowserRouter([
       {
         path: "comments",
         element: <AdminCommentsPage />,
+      },
+      {
+        path: "carousels",
+        element: <AdminCarouselsPage />,
       },
       {
         path: "conversaciones",

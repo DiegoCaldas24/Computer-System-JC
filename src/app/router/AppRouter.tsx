@@ -16,6 +16,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import { NotFound } from "../../pages/NotFound";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import SalesPage from "../../features/sales/pages/SalesPage";
+import NewSalePage from "../../features/sales/pages/NewSalePage";
 import CategoriesPage from "../../features/categories/pages/CategoriesPage";
 import BrandsPage from "../../features/brands/pages/BrandsPage";
 import AdminCommentsPage from "../../features/comments/pages/AdminCommentsPage";
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
       {
         path: "sales",
         element: <SalesPage />,
+      },
+      {
+        path: "sales/new",
+        element: <NewSalePage />,
       },
       {
         path: "products",

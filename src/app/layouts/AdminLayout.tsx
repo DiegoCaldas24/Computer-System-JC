@@ -4,8 +4,9 @@ import { ToastProvider } from "../../shared/components/Toast";
 import { signOut } from "../../services/supabase/auth";
 
 const NAV_ITEMS = [
-  { label: "Dashboard", icon: <Icons.Cpu />, to: "/admin" },
-  { label: "Ventas", icon: <Icons.ShoppingBag />, to: "/admin/sales" },
+  { label: "Dashboard", icon: <Icons.Cpu />, to: "/admin", end: true },
+  { label: "Ventas", icon: <Icons.ShoppingBag />, to: "/admin/sales", end: true },
+  { label: "Nueva Venta", icon: <Icons.Plus />, to: "/admin/sales/new" },
   { label: "Productos", icon: <Icons.Laptop />, to: "/admin/products" },
   { label: "Categorías", icon: <Icons.Menu />, to: "/admin/categories" },
   { label: "Marcas", icon: <Icons.Shield />, to: "/admin/brands" },
@@ -20,8 +21,8 @@ export default function AdminLayout() {
 
   return (
     <div className="flex min-h-screen bg-[#f4f6fa]">
-      <aside className="w-60 bg-[#081f57] text-white p-5 shrink-0 flex flex-col">
-        <div className="flex items-center gap-3 mb-10">
+      <aside className="w-60 bg-[#081f57] text-white p-5 shrink-0 flex flex-col h-screen sticky top-0">
+        <div className="flex items-center gap-3 mb-2">
           <img
             src="/src/assets/logos/logo-vec-w.png"
             alt="Logo"
@@ -29,14 +30,14 @@ export default function AdminLayout() {
           />
         </div>
 
-        <nav className="flex flex-col gap-1">
-          {NAV_ITEMS.map(({ label, icon, to }) => (
+        <nav className="flex flex-col gap-1 flex-1 overflow-y-auto min-h-0">
+          {NAV_ITEMS.map(({ label, icon, to, end }) => (
             <NavLink
               key={to}
               to={to}
-              end={to === "/admin"}
+              end={end}
               className={({ isActive }) =>
-                `flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm transition-colors ${
+                `flex items-center gap-3 w-full px-2 py-2 rounded-lg text-sm transition-colors ${
                   isActive ? "bg-[#1144b5]" : "hover:bg-[#1144b5]"
                 }`
               }

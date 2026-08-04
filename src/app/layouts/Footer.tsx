@@ -34,8 +34,9 @@ export default function Footer() {
               <a
                 href="https://www.tiktok.com/@computersystemjc?lang=es"
                 target="_blank"
-                className="hover:text-sky-500 transition-colors"
+                className="flex items-center gap-2 hover:text-sky-500 transition-colors"
               >
+                <Icons.TikTok />
                 TikTok
               </a>
             </li>
@@ -43,8 +44,9 @@ export default function Footer() {
               <a
                 href="https://www.facebook.com/profile.php?id=61581330572746"
                 target="_blank"
-                className="hover:text-sky-500 transition-colors"
+                className="flex items-center gap-2 hover:text-sky-500 transition-colors"
               >
+                <Icons.Facebook />
                 Facebook
               </a>
             </li>
@@ -52,8 +54,9 @@ export default function Footer() {
               <a
                 href="https://www.instagram.com/computersystemjc.b2/?hl=es"
                 target="_blank"
-                className="hover:text-sky-500 transition-colors"
+                className="flex items-center gap-2 hover:text-sky-500 transition-colors"
               >
+                <Icons.Instagram />
                 Instagram
               </a>
             </li>
@@ -61,8 +64,9 @@ export default function Footer() {
               <a
                 href="https://www.youtube.com/@ComputerSystemJC"
                 target="_blank"
-                className="hover:text-sky-500 transition-colors"
+                className="flex items-center gap-2 hover:text-sky-500 transition-colors"
               >
+                <Icons.Youtube />
                 Youtube
               </a>
             </li>

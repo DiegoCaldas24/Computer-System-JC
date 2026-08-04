@@ -2,8 +2,9 @@ import { useState, useMemo } from "react";
 import { Carousel } from "../../../shared/components/Carousel";
 import { ErrorState } from "../../../shared/components/ErrorState";
 import { Pagination } from "../../../shared/components/Pagination";
-import { BrandsCard } from "../../brands/components/BrandsCard";
-import { CategoryCard } from "../../categories/components/CategoryCard";
+import { FilterCard } from "../../../shared/components/FilterCard";
+import { useBrands } from "../../brands/hooks/useBrands";
+import { useCategories } from "../../categories/hooks/useCategories";
 import { ProductCard } from "../components/ProductCard";
 import { useProducts } from "../hooks/useProducts";
 import { useSearch } from "../../../shared/hooks/useSearch";
@@ -18,6 +19,29 @@ export function ProductsPage() {
   const { searchQuery } = useSearch();
 
   const { products: allProducts, error: productsError } = useProducts();
+  const { categories } = useCategories();
+  const { brands } = useBrands();
+
+  const activeProducts = useMemo(
+    () => allProducts.filter((p) => p.isActive !== false),
+    [allProducts],
+  );
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<number, number> = {};
+    for (const p of activeProducts) {
+      if (p.category_id) counts[p.category_id] = (counts[p.category_id] ?? 0) + 1;
+    }
+    return counts;
+  }, [activeProducts]);
+
+  const brandCounts = useMemo(() => {
+    const counts: Record<number, number> = {};
+    for (const p of activeProducts) {
+      if (p.brand_id) counts[p.brand_id] = (counts[p.brand_id] ?? 0) + 1;
+    }
+    return counts;
+  }, [activeProducts]);
 
   const images = [
     "https://qoqkfefgnvgrfeorwteh.supabase.co/storage/v1/object/sign/images-logos/1.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNmM0NDM3OC0wMmM4LTQ0OTMtYjVlMS0xMmE2ZDQ5N2M0ZjAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMtbG9nb3MvMS53ZWJwIiwiaWF0IjoxNzc5MDQxMjI2LCJleHAiOjE5MzY3MjEyMjZ9.eCJpxYtAtWKZ-S4MFBo64bPM69QPaXnrT0JFieUjdOM",
@@ -110,13 +134,24 @@ export function ProductsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-64 shrink-0 flex flex-col gap-4">
-              <CategoryCard
-                selectedCategories={selectedCategories}
-                onCategoryChange={handleCategoryChange}
+              <FilterCard
+                title="CATEGORIAS"
+                idPrefix="category"
+                items={categories.map((c) => ({
+                  id: c.category_id,
+                  name: c.name,
+                }))}
+                selectedIds={selectedCategories}
+                onToggle={handleCategoryChange}
+                counts={categoryCounts}
               />
-              <BrandsCard
-                selectedBrands={selectedBrands}
-                onBrandChange={handleBrandChange}
+              <FilterCard
+                title="MARCAS"
+                idPrefix="brand"
+                items={brands.map((b) => ({ id: b.brand_id, name: b.name }))}
+                selectedIds={selectedBrands}
+                onToggle={handleBrandChange}
+                counts={brandCounts}
               />
             </div>
 

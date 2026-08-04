@@ -30,6 +30,16 @@ export async function getProductByCategory(category: number) {
   return data;
 }
 
+export async function getProductByCode(code: string) {
+  const { data, error } = await supabase
+    .from("products")
+    .select("product_id, code, name, price, stock")
+    .eq("code", code.trim().toUpperCase())
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 export async function searchProducts(
   searchQuery: string,
   categoryIds?: number[],

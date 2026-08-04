@@ -35,11 +35,26 @@ export async function upsertCartItem(
   productId: number,
   quantity: number,
 ) {
-  const { error } = await supabase.from("cartItems").upsert(
-    { cart_id: cartId, product_id: productId, quantity },
-    { onConflict: "cart_id, product_id" },
-  );
-  if (error) throw error;
+  const { data: existing } = await supabase
+    .from("cartItems")
+    .select("id")
+    .eq("cart_id", cartId)
+    .eq("product_id", productId)
+    .maybeSingle();
+
+  if (existing) {
+    const { error } = await supabase
+      .from("cartItems")
+      .update({ quantity })
+      .eq("cart_id", cartId)
+      .eq("product_id", productId);
+    if (error) throw error;
+  } else {
+    const { error } = await supabase
+      .from("cartItems")
+      .insert({ cart_id: cartId, product_id: productId, quantity });
+    if (error) throw error;
+  }
 }
 
 export async function removeCartItemFromServer(cartId: number, productId: number) {

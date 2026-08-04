@@ -22,7 +22,6 @@ type CartAction =
   | { type: "CLEAR" }
   | { type: "HYDRATE"; items: CartItem[] };
 
-const STORAGE_KEY = "jc-cart";
 const PRODUCT_SELECT =
   "*, brand:brands!brand_id(name), category:category!category_id(name)";
 
@@ -72,64 +71,77 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, dispatch] = useReducer(cartReducer, []);
   const [cartId, setCartId] = useState<number | null>(null);
   const isHydrating = useRef(true);
+  const loadingRef = useRef(false);
   const syncTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
-    const init = async () => {
+    let active = true;
+
+    const loadCartFromServer = async (userId: string) => {
+      if (loadingRef.current) return;
+      loadingRef.current = true;
       try {
-        const session = await getSession();
-        if (session?.user) {
-          const cid = await getOrCreateCart(session.user.id);
-          setCartId(cid);
+        const cid = await getOrCreateCart(userId);
+        console.log("[Cart] cartId obtenido:", cid);
+        if (!active) return;
+        setCartId(cid);
 
-          const serverItems = await getCartItemsFromServer(cid);
-          if (serverItems.length > 0) {
-            const productIds = serverItems.map((i) => i.product_id);
-            const { data: products } = await supabase
-              .from("products")
-              .select(PRODUCT_SELECT)
-              .in("product_id", productIds);
+        const serverItems = await getCartItemsFromServer(cid);
+        console.log("[Cart] items en BD:", serverItems.length);
+        if (serverItems.length > 0) {
+          const productIds = serverItems.map((i) => i.product_id);
+          const { data: products, error: productsError } = await supabase
+            .from("products")
+            .select(PRODUCT_SELECT)
+            .in("product_id", productIds);
+          if (productsError) throw productsError;
 
-            if (products) {
-              const merged: CartItem[] = products.map((p) => {
-                const server = serverItems.find((i) => i.product_id === p.product_id);
-                return { product: p as Product, quantity: server?.quantity ?? 1 };
-              });
-
-              const stored = localStorage.getItem(STORAGE_KEY);
-              if (stored) {
-                try {
-                  const localItems: CartItem[] = JSON.parse(stored);
-                  for (const local of localItems) {
-                    if (!merged.find((m) => m.product.product_id === local.product.product_id)) {
-                      merged.push(local);
-                    }
-                  }
-                } catch { /* ignore */ }
-              }
-
-              dispatch({ type: "HYDRATE", items: merged });
-              isHydrating.current = false;
-              return;
-            }
+          if (active && products) {
+            const merged: CartItem[] = products.map((p) => {
+              const server = serverItems.find((i) => i.product_id === p.product_id);
+              return { product: p as Product, quantity: server?.quantity ?? 1 };
+            });
+            dispatch({ type: "HYDRATE", items: merged });
           }
         }
-      } catch { /* ignore */ }
-
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try { dispatch({ type: "HYDRATE", items: JSON.parse(stored) }); }
-        catch { /* ignore */ }
+      } catch (err) {
+        console.error("[CartProvider] Error al cargar el carrito desde la BD:", err);
+      } finally {
+        loadingRef.current = false;
       }
-      isHydrating.current = false;
+    };
+
+    const init = async () => {
+      const session = await getSession();
+      console.log("[Cart] init, hay sesión?:", !!session?.user, session?.user?.id ?? "-");
+      if (active && session?.user) {
+        isHydrating.current = true;
+        await loadCartFromServer(session.user.id);
+        if (active) isHydrating.current = false;
+      }
     };
 
     init();
-  }, []);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("[Cart] evento de auth:", event, "user:", session?.user?.id ?? "-");
+      if (session?.user) {
+        isHydrating.current = true;
+        loadCartFromServer(session.user.id).finally(() => {
+          if (active) isHydrating.current = false;
+        });
+      } else {
+        isHydrating.current = false;
+        setCartId(null);
+        dispatch({ type: "CLEAR" });
+      }
+    });
+
+    return () => {
+      active = false;
+      data.subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     if (isHydrating.current || !cartId) return;
@@ -138,18 +150,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
     syncTimer.current = setTimeout(async () => {
       try {
         const serverItems = await getCartItemsFromServer(cartId);
+        console.log("[Cart] sync: items locales", items.length, "- en BD", serverItems.length);
         for (const item of items) {
           const existing = serverItems.find((s) => s.product_id === item.product.product_id);
           if (!existing || existing.quantity !== item.quantity) {
             await upsertCartItem(cartId, item.product.product_id, item.quantity);
+            console.log("[Cart] upsert product_id:", item.product.product_id, "qty:", item.quantity);
           }
         }
         for (const server of serverItems) {
           if (!items.find((i) => i.product.product_id === server.product_id)) {
             await removeCartItemFromServer(cartId, server.product_id);
+            console.log("[Cart] remove product_id:", server.product_id);
           }
         }
-      } catch { /* ignore */ }
+      } catch (err) {
+        console.error("[CartProvider] Error al sincronizar el carrito con la BD:", err);
+      }
     }, 1000);
   }, [items, cartId]);
 
@@ -162,7 +179,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const clearCart = async () => {
     dispatch({ type: "CLEAR" });
     if (cartId) {
-      try { await clearCartItemsOnServer(cartId); } catch { /* ignore */ }
+      try { await clearCartItemsOnServer(cartId); } catch (err) {
+        console.error("[CartProvider] Error al vaciar el carrito en la BD:", err);
+      }
     }
   };
 
